@@ -1,6 +1,6 @@
 import React from 'react';
 import useGetAllCountries from '../../api/useGetAllCountries';
-import Country from '../Country';
+import Country from '../CountryCard';
 import { CountriesWrapper } from './Countries.styled';
 
 const Countries = () => {
