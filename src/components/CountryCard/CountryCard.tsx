@@ -1,13 +1,12 @@
 import React, { FC, useMemo } from 'react';
 
-import { BsPeopleFill } from 'react-icons/bs';
-
 import { CountryType } from '../../models/Country';
 import { formatPopulation } from '../../utils/formatPopulation';
 import {
   CountryCardFlag,
   CountryCardFlagWrapper,
   CountryCardFooter,
+  CountryCardFooterIcon,
   CountryCardHeader,
   CountryCardRegion,
   CountryCardTitle,
@@ -55,9 +54,9 @@ const CountryCard: FC<{ loading: boolean; country: CountryType }> = ({
               alt={`${country.name.common} flag`}
             />
           </CountryCardFlagWrapper>
-          {/* <CountryCardBody></CountryCardBody> */}
+
           <CountryCardFooter>
-            <BsPeopleFill style={{ color: '#bbb' }} />
+            <CountryCardFooterIcon />
             <p>{formatPopulation(country.population)}</p>
           </CountryCardFooter>
         </>
