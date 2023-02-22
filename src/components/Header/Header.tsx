@@ -1,6 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
+import { RootState } from '../../store';
 
 import HeaderLogo from './HeaderLogo';
 
@@ -14,20 +16,14 @@ export const HeaderWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const ActionsBar = () => {
-  return (
-    <div>
-      <p>Order By</p>
-      <p>Show Region or All</p>
-    </div>
-  );
-};
-
 const Header = () => {
+  const theme = useSelector(
+    (state: RootState) => state.countries.theme,
+  );
+
   return (
     <HeaderWrapper>
-      <HeaderLogoStyled />
-      <ActionsBar />
+      <HeaderLogoStyled color={theme.colors.primary} />
     </HeaderWrapper>
   );
 };

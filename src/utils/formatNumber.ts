@@ -1,4 +1,4 @@
-export const formatPopulation = (population: number) => {
+export const formatNumber = (population: number) => {
   if (population.toString().length <= 3) {
     return population;
   }

@@ -3,7 +3,7 @@ import React, { FC, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { CountryType } from '../../models/Country';
-import { formatPopulation } from '../../utils/formatPopulation';
+import { formatNumber } from '../../utils/formatNumber';
 import {
   CountryCardFlag,
   CountryCardFlagWrapper,
@@ -31,10 +31,10 @@ const CountryCard: FC<{ loading: boolean; country: CountryType }> = ({
       return '0.65rem';
     }
     if (country.name.common.length > 20) {
-      return '0.75rem';
+      return '0.7rem';
     }
-    if (country.name.common.length > 16) {
-      return '0.85rem';
+    if (country.name.common.length > 14) {
+      return '0.75rem';
     }
     return '1rem';
   }, [country.name.common.length]);
@@ -68,7 +68,7 @@ const CountryCard: FC<{ loading: boolean; country: CountryType }> = ({
 
           <CountryCardFooter>
             <CountryCardFooterIcon />
-            <p>{formatPopulation(country.population)}</p>
+            <p>{formatNumber(country.population)}</p>
           </CountryCardFooter>
         </>
       )}

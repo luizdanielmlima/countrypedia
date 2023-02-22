@@ -1,6 +1,19 @@
 import styled from 'styled-components';
 
 export const AppWrapper = styled.div`
+  background-color: ${(props) => props.theme.colors.background};
+  color: ${(props) => props.theme.colors.primary};
+  padding: ${(props) => props.theme.spacings.xxLarge};
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Roboto Slab', serif;
+  }
+
   h1 {
     font-size: ${(props) => props.theme.fontSizes.xLarge};
   }

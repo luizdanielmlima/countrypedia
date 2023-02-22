@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CountryType } from '../models/Country';
-import { darkTheme, ThemeModel } from '../styles/theme';
+import { darkTheme, lightTheme, ThemeModel } from '../styles/theme';
 import { france } from './france';
 
 export interface CountriesSliceState {
@@ -12,7 +12,7 @@ export interface CountriesSliceState {
 const initialCountriesState: CountriesSliceState = {
   countries: [],
   country: france,
-  theme: darkTheme,
+  theme: lightTheme,
 };
 
 const countriesSlice = createSlice({

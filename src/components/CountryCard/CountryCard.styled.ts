@@ -9,9 +9,9 @@ export const CountryCardHeader = styled.div`
 `;
 
 export const CountryCardTitle = styled.p<{ fontSize: string }>`
-  color: #333;
+  color: ${(props) => props.theme.colors.primary};
   font-size: ${({ fontSize }) => fontSize};
-  font-weight: 800;
+  font-weight: 600;
 `;
 
 export const CountryCardRegion = styled.p`
@@ -38,7 +38,7 @@ export const CountryCardFlagWrapper = styled.figure`
 `;
 
 export const CountryCardFlag = styled.img`
-  border: 1px solid #ccc;
+  border: 1px solid ${(props) => props.theme.colors.surface};
 `;
 
 export const CountryCardBody = styled.div`
@@ -52,32 +52,33 @@ export const CountryCardFooter = styled.div`
 `;
 
 export const CountryCardFooterIcon = styled(BsPeopleFill)`
-  color: #555;
+  color: ${(props) => props.theme.colors.primaryVariant};
 `;
 
 export const CountryCardWrapper = styled.div`
-  padding: 16px;
   cursor: pointer;
-  border: 1px solid #eee;
   width: 160px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  padding: ${(props) => props.theme.spacings.medium};
+  background-color: ${(props) => props.theme.colors.surface};
+  border: 1px solid ${(props) => props.theme.colors.surface};
+  border-radius: ${(props) => props.theme.borderRadius.small};
+  box-shadow: ${(props) => props.theme.shadows.xSmall};
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
+  transition: all 300ms ease-in;
+
   &:hover {
-    box-shadow: 0px 10px 15px -3px rgba(16, 24, 40, 0.1),
-      0px 4px 6px -4px rgba(16, 24, 40, 0.1);
+    box-shadow: ${(props) => props.theme.shadows.xLarge};
 
     img {
       filter: grayscale(0%);
     }
 
     ${CountryCardTitle}, ${CountryCardFooterIcon} {
-      color: black;
+      color: ${(props) => props.theme.colors.primary};
       font-weight: 900;
     }
 
