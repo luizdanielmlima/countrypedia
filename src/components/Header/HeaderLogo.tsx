@@ -40,29 +40,54 @@ const HeaderLogo = () => (
         fill="#434343"
       />
       <rect
-        id="Retângulo_1"
-        data-name="Retângulo 1"
+        id="Flag_Piece_1"
+        data-name="Flag_Piece 1"
         width="5"
         height="8"
         transform="translate(479 373)"
         fill="#002776"
-      />
+      >
+        {/* <animate
+          attributeName="width"
+          values="5;7;5"
+          begin="0s"
+          dur="2s"
+          repeatCount="indefinite"
+        /> */}
+      </rect>
       <rect
-        id="Retângulo_2"
-        data-name="Retângulo 2"
+        id="Flag_Piece_2"
+        data-name="Flag_Piece 2"
         width="4"
         height="8"
         transform="translate(485 373)"
         fill="#fedf00"
-      />
+      >
+        {/* <animate
+          attributeName="width"
+          values="5;7;5"
+          begin="1.5s"
+          dur="2s"
+          repeatCount="indefinite"
+        /> */}
+      </rect>
+
       <rect
-        id="Retângulo_3"
-        data-name="Retângulo 3"
+        id="Flag_Piece_3"
+        data-name="Flag_Piece 3"
         width="5"
         height="8"
         transform="translate(491 373)"
         fill="#009b3a"
-      />
+      >
+        {/* <animate
+          attributeName="width"
+          values="5;7;5"
+          begin="3s"
+          dur="2s"
+          repeatCount="indefinite"
+        /> */}
+      </rect>
     </g>
   </svg>
 );

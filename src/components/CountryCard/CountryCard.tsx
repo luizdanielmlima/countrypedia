@@ -1,5 +1,7 @@
 import React, { FC, useMemo } from 'react';
 
+import { useDispatch } from 'react-redux';
+
 import { CountryType } from '../../models/Country';
 import { formatPopulation } from '../../utils/formatPopulation';
 import {
@@ -12,11 +14,18 @@ import {
   CountryCardTitle,
   CountryCardWrapper,
 } from './CountryCard.styled';
+import { countriesActions } from '../../store/countries';
 
 const CountryCard: FC<{ loading: boolean; country: CountryType }> = ({
   loading,
   country,
 }) => {
+  const dispatch = useDispatch();
+
+  const handleClickCountry = () => {
+    dispatch(countriesActions.setCountry(country));
+  };
+
   const getFontSize = useMemo(() => {
     if (country.name.common.length > 24) {
       return '0.65rem';
@@ -29,9 +38,11 @@ const CountryCard: FC<{ loading: boolean; country: CountryType }> = ({
     }
     return '1rem';
   }, [country.name.common.length]);
+
   return (
     <CountryCardWrapper
       key={`${country.name.common}_${country.capital}`}
+      onClick={handleClickCountry}
     >
       {!country && loading && <p>Loading...</p>}
       {country && !loading && (

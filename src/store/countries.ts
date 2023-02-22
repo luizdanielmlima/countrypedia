@@ -1,23 +1,38 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CountryType } from '../models/Country';
+import { darkTheme, ThemeModel } from '../styles/theme';
+import { france } from './france';
 
-interface CountriesSliceState {
+export interface CountriesSliceState {
   country?: CountryType;
   countries?: CountryType[] | [];
+  theme: ThemeModel;
 }
 
-const initialCountriesState: CountriesSliceState = { countries: [] };
+const initialCountriesState: CountriesSliceState = {
+  countries: [],
+  country: france,
+  theme: darkTheme,
+};
 
 const countriesSlice = createSlice({
   name: 'countries',
   initialState: initialCountriesState,
   reducers: {
-    setCountry(state, action) {
+    setCountries(state, action: PayloadAction<CountryType[]>) {
+      state.countries = action.payload;
+    },
+    setCountry(state, action: PayloadAction<CountryType>) {
       state.country = action.payload;
+    },
+    setTheme(state, action: PayloadAction<ThemeModel>) {
+      state.theme = action.payload;
     },
   },
 });
 
-export const counterActions = countriesSlice.actions;
+const { actions, reducer } = countriesSlice;
 
-export default countriesSlice.reducer;
+export const countriesActions = actions;
+
+export default reducer;
