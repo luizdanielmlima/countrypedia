@@ -18,7 +18,6 @@ const Languages: FC<{ languages: Record<string, string> }> = ({
   const languagesArr = useMemo(() => {
     if (languages) {
       const langsArr = Object.entries(languages);
-      console.log('langsArr: ', langsArr);
       return langsArr.map((lang) => lang[1]);
     }
     return [];

@@ -19,6 +19,7 @@ import {
   InfoLabel,
   InfoValue,
 } from './Country.styled';
+import Currencies from './Currencies';
 import Languages from './Languages';
 
 const Country = () => {
@@ -70,14 +71,20 @@ const Country = () => {
                     <Languages languages={country.languages} />
                   </InfoValue>
                 </InfoItemVert>
+                <InfoItemVert>
+                  <InfoLabel>Currency</InfoLabel>
+                  <InfoValue>
+                    <Currencies currencies={country.currencies} />
+                  </InfoValue>
+                </InfoItemVert>
               </InfoItems>
               <InfoItems>
-                <InfoItemHoriz>
+                <InfoItemVert>
                   <InfoLabel>Capital</InfoLabel>
                   <InfoValue>
                     {country.capital.length > 0 && country.capital[0]}
                   </InfoValue>
-                </InfoItemHoriz>
+                </InfoItemVert>
               </InfoItems>
             </InfoItemWrapper>
           </ContryContentWrapper>

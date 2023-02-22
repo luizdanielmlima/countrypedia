@@ -1,6 +1,6 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { CountryType } from '../../models/Country';
 import { formatNumber } from '../../utils/formatNumber';
@@ -15,12 +15,23 @@ import {
   CountryCardWrapper,
 } from './CountryCard.styled';
 import { countriesActions } from '../../store/countries';
+import { RootState } from '../../store';
 
 const CountryCard: FC<{ loading: boolean; country: CountryType }> = ({
   loading,
   country,
 }) => {
   const dispatch = useDispatch();
+  const currentCountry = useSelector(
+    (state: RootState) => state.countries.country,
+  );
+
+  const isSelected = useMemo(() => {
+    if (currentCountry) {
+      return currentCountry.cca2 === country.cca2;
+    }
+    return false;
+  }, [country.cca2, currentCountry]);
 
   const handleClickCountry = () => {
     dispatch(countriesActions.setCountry(country));
@@ -43,6 +54,7 @@ const CountryCard: FC<{ loading: boolean; country: CountryType }> = ({
     <CountryCardWrapper
       key={`${country.name.common}_${country.capital}`}
       onClick={handleClickCountry}
+      selected={isSelected}
     >
       {!country && loading && <p>Loading...</p>}
       {country && !loading && (
@@ -57,7 +69,7 @@ const CountryCard: FC<{ loading: boolean; country: CountryType }> = ({
               </CountryCardRegion>
             )}
           </CountryCardHeader>
-          <CountryCardFlagWrapper>
+          <CountryCardFlagWrapper selected={isSelected}>
             <CountryCardFlag
               loading="lazy"
               width={120}

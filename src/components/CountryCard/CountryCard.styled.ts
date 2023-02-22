@@ -19,7 +19,9 @@ export const CountryCardRegion = styled.p`
   font-weight: 400;
 `;
 
-export const CountryCardFlagWrapper = styled.figure`
+export const CountryCardFlagWrapper = styled.figure<{
+  selected: boolean;
+}>`
   height: 90px;
   width: 100%;
   margin: 16px 0;
@@ -29,7 +31,8 @@ export const CountryCardFlagWrapper = styled.figure`
   justify-content: center;
 
   img {
-    filter: grayscale(80%);
+    filter: ${({ theme, selected }) =>
+      selected ? 'grayscale(0%)' : 'grayscale(80%)'};
     width: auto;
     height: auto;
     max-width: 100%;
@@ -55,14 +58,17 @@ export const CountryCardFooterIcon = styled(BsPeopleFill)`
   color: ${(props) => props.theme.colors.primaryVariant};
 `;
 
-export const CountryCardWrapper = styled.div`
+export const CountryCardWrapper = styled.div<{ selected: boolean }>`
   cursor: pointer;
   width: 160px;
   padding: ${(props) => props.theme.spacings.medium};
   background-color: ${(props) => props.theme.colors.surface};
-  border: 1px solid ${(props) => props.theme.colors.surface};
+  border: 1px solid
+    ${({ theme, selected }) =>
+      selected ? theme.colors.primary : theme.colors.surface};
   border-radius: ${(props) => props.theme.borderRadius.small};
-  box-shadow: ${(props) => props.theme.shadows.xSmall};
+  box-shadow: ${({ theme, selected }) =>
+    selected ? theme.shadows.xLarge : theme.shadows.xSmall};
 
   display: flex;
   flex-direction: column;
