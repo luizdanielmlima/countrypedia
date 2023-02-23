@@ -47,7 +47,7 @@ const Country = () => {
                 src={country.flags.png}
                 alt={`${country.name.common} flag`}
               />
-              <CountryMap />
+              <CountryMap countryData={country} />
             </FlagMapWrapper>
             <InfoItemWrapper>
               <InfoItems>
