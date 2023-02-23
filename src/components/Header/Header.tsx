@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 import { RootState } from '../../store';
 
 import HeaderLogo from './HeaderLogo';
@@ -11,7 +11,7 @@ export const HeaderLogoStyled = styled(HeaderLogo)`
 `;
 
 export const HeaderWrapper = styled.div`
-  margin-bottom: 48px;
+  margin-bottom: ${(props) => props.theme.spacings.medium};
   display: flex;
   justify-content: space-between;
 `;

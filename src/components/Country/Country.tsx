@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { formatNumber } from '../../utils/formatNumber';
-import CountryMap from '../CountryMap';
+import CountryMap from './CountryMap';
 import {
   ContryContentWrapper,
   CountryFlag,
@@ -12,7 +12,6 @@ import {
   CountryHeaderRegion,
   CountryWrapper,
   FlagMapWrapper,
-  InfoItemHoriz,
   InfoItems,
   InfoItemVert,
   InfoItemWrapper,
