@@ -4,6 +4,7 @@ export const AppWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.primary};
   padding: ${(props) => props.theme.spacings.xxLarge};
+  padding-top: 0;
 
   h1,
   h2,
