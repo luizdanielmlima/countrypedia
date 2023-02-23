@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { FiltersWrapper, FilterWrapper } from './Filters.styled';
 
 export interface FilterProps {
@@ -14,13 +14,10 @@ const Filters: FC<FilterProps> = ({
   onRegionSelected,
   onOrderBySelected,
 }) => {
-  // const [selectedOrderBy, setSelectedOrderBy] = useState('name');
-  // const [selectedRegion, setSelectedRegion] = useState('europe');
-
   const handleOrderByChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
-    // event.preventDefault();
+    event.preventDefault();
     const selection = event.target.value;
     onOrderBySelected(selection);
   };

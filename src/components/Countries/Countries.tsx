@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import useGetAllCountries from '../../api/useGetAllCountries';
 import { CountryType } from '../../models/Country';
@@ -18,13 +18,11 @@ const Countries = () => {
     useState('commonName');
   const [selectedRegion, setSelectedRegion] = useState('all');
 
-  // const handleRegionSelected = useCallback((selection: string) => {
-
-  // },
-  // []);
-
-  // const handleOrderBySelected = useCallback((selection: string) => {},
-  // []);
+  useEffect(() => {
+    if (countries && countries.length > 0) {
+      dispatch(countriesActions.setCountries(countries));
+    }
+  }, [countries, dispatch]);
 
   const countriesOnTheList = useMemo(() => {
     if (countries && countries.length > 0) {

@@ -11,7 +11,6 @@ import { RootState } from '../../../store';
 
 export const CountryMapWrapper = styled.div`
   background-color: 1px solid ${(props) => props.theme.colors.primary};
-  /* border: 1px solid ${(props) => props.theme.colors.primary}; */
   display: flex;
   align-items: center;
   justify-content: center;

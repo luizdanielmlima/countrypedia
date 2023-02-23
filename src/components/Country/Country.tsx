@@ -20,6 +20,7 @@ import {
 } from './Country.styled';
 import Currencies from './Currencies';
 import Languages from './Languages';
+import CountryBorders from './CountryBorders';
 
 const Country = () => {
   const country = useSelector(
@@ -102,6 +103,15 @@ const Country = () => {
                   )}
                   {!country.currencies && '-'}
                 </InfoValue>
+              </InfoItemVert>
+              <InfoItemVert>
+                <InfoLabel>Borders</InfoLabel>
+                {country.borders && country.borders.length > 0 ? (
+                  <CountryBorders borders={country.borders} />
+                ) : (
+                  <p>-</p>
+                )}
+                {!country.currencies && '-'}
               </InfoItemVert>
             </>
           </ContryContentWrapper>
