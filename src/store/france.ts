@@ -13,6 +13,7 @@ export const france: CountryType = {
   ccn3: '250',
   cca3: 'FRA',
   cioc: 'FRA',
+  commonName: 'France',
   independent: true,
   status: 'officially-assigned',
   unMember: true,

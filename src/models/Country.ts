@@ -14,6 +14,7 @@ export interface CountryType {
   ccn3: string;
   cioc: string;
   coatOfArms: Record<string, string>;
+  commonName: string; // added this to make sorting easier
   continents: string[];
   currencies: Record<string, Currency>;
   flags: { alt: string; png: string; svg: string };
