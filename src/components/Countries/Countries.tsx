@@ -1,6 +1,8 @@
 import React, { useCallback, useMemo, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import useGetAllCountries from '../../api/useGetAllCountries';
 import { CountryType } from '../../models/Country';
+import { countriesActions } from '../../store/countries';
 import { AnimatedEntrance } from '../../styles/Animations.styled';
 import Country from '../CountryCard';
 import { CountriesList, CountriesWrapper } from './Countries.styled';
@@ -8,6 +10,7 @@ import Filters from './Filters';
 
 const Countries = () => {
   const pageSize = 32;
+  const dispatch = useDispatch();
   const { countries, countriesLoading, countriesError } =
     useGetAllCountries();
 
@@ -33,7 +36,8 @@ const Countries = () => {
       });
       if (selectedRegion !== 'all') {
         filteredData = filteredData.filter(
-          (country) => country.region === selectedRegion,
+          (country) =>
+            country.region && country.region === selectedRegion,
         );
       }
       if (selectedOrderBy) {
@@ -57,9 +61,10 @@ const Countries = () => {
           },
         );
       }
+      dispatch(countriesActions.setCountry(filteredData[0]));
       return filteredData.slice(0, pageSize);
     }
-  }, [countries, selectedOrderBy, selectedRegion]);
+  }, [countries, dispatch, selectedOrderBy, selectedRegion]);
 
   return (
     <CountriesWrapper>

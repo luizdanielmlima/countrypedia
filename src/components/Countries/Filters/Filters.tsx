@@ -59,7 +59,7 @@ const Filters: FC<FilterProps> = ({
           <option value="Americas">Americas</option>
           <option value="Asia">Asia</option>
           <option value="Europe">Europe</option>
-          <option value="Ooceania">Oceania</option>
+          <option value="Oceania">Oceania</option>
         </select>
       </FilterWrapper>
     </FiltersWrapper>

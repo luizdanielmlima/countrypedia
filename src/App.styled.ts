@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const AppWrapper = styled.div`
+  min-height: 100vh;
   background-color: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.primary};
   padding: ${(props) => props.theme.spacings.xxLarge};

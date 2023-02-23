@@ -7,6 +7,12 @@ export const CurrenciesWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+`;
+
+export const CurrencyItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 
   p:not(:first-child) {
     margin: 0 ${(props) => props.theme.spacings.xxSmall};
@@ -30,11 +36,11 @@ const Currencies: FC<{ currencies: Record<string, Currency> }> = ({
         currenciesArr.length > 0 &&
         currenciesArr.map((cur, index) => {
           return (
-            <>
+            <CurrencyItem key={`${index}_${cur.symbol}`}>
               <p>{cur.name}</p>
               <p>{cur.symbol}</p>
               <p>{index !== currenciesArr.length - 1 && ` | `}</p>
-            </>
+            </CurrencyItem>
           );
         })}
     </CurrenciesWrapper>

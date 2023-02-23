@@ -33,11 +33,11 @@ const Country = () => {
         <>
           <CountryHeader>
             <CountryHeaderName>
-              {country.name.common}
+              {country.name.common || '-'}
             </CountryHeaderName>
             <CountryHeaderDivider>|</CountryHeaderDivider>
             <CountryHeaderRegion>
-              {country.region.toUpperCase()}
+              {country.region ? country.region.toUpperCase() : '-'}
             </CountryHeaderRegion>
           </CountryHeader>
           <ContryContentWrapper>
@@ -64,28 +64,38 @@ const Country = () => {
                     <span> km&sup2;</span>
                   </InfoValue>
                 </InfoItemVert>
-                <InfoItemVert>
-                  <InfoLabel>Language</InfoLabel>
-                  <InfoValue>
-                    <Languages languages={country.languages} />
-                  </InfoValue>
-                </InfoItemVert>
-                <InfoItemVert>
-                  <InfoLabel>Currency</InfoLabel>
-                  <InfoValue>
-                    <Currencies currencies={country.currencies} />
-                  </InfoValue>
-                </InfoItemVert>
               </InfoItems>
               <InfoItems>
                 <InfoItemVert>
                   <InfoLabel>Capital</InfoLabel>
                   <InfoValue>
-                    {country.capital.length > 0 && country.capital[0]}
+                    {country.capital?.length > 0
+                      ? country.capital[0]
+                      : '-'}
                   </InfoValue>
                 </InfoItemVert>
               </InfoItems>
             </InfoItemWrapper>
+            <>
+              <InfoItemVert>
+                <InfoLabel>Language</InfoLabel>
+                <InfoValue>
+                  {country.languages && (
+                    <Languages languages={country.languages} />
+                  )}
+                  {!country.languages && '-'}
+                </InfoValue>
+              </InfoItemVert>
+              <InfoItemVert>
+                <InfoLabel>Currency</InfoLabel>
+                <InfoValue>
+                  {country.currencies && (
+                    <Currencies currencies={country.currencies} />
+                  )}
+                  {!country.currencies && '-'}
+                </InfoValue>
+              </InfoItemVert>
+            </>
           </ContryContentWrapper>
         </>
       )}

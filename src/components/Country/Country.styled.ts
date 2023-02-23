@@ -74,7 +74,7 @@ export const InfoLabel = styled.p`
   font-size: ${(props) => props.theme.fontSizes.xSmall};
   font-weight: 300;
 `;
-export const InfoValue = styled.p`
+export const InfoValue = styled.div`
   font-size: ${(props) => props.theme.fontSizes.medium};
   font-weight: 600;
 `;
