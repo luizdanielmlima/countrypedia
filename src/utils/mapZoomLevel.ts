@@ -1,5 +1,4 @@
 export const getMapZoomLevel = (countryArea: number) => {
-  console.log('zoom');
   if (countryArea > 10000000) {
     return 2;
   }

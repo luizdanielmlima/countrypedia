@@ -21,6 +21,7 @@ import {
 import Currencies from './Currencies';
 import Languages from './Languages';
 import CountryBorders from './CountryBorders';
+import CapitalForecast from '../CapitalForecast';
 
 const Country = () => {
   const country = useSelector(
@@ -82,6 +83,9 @@ const Country = () => {
                       ? country.capital[0]
                       : '-'}
                   </InfoValue>
+                </InfoItemVert>
+                <InfoItemVert>
+                  <CapitalForecast country={country} />
                 </InfoItemVert>
               </InfoItems>
             </InfoItemWrapper>
