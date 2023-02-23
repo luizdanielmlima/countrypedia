@@ -64,6 +64,14 @@ const Country = () => {
                     <span> km&sup2;</span>
                   </InfoValue>
                 </InfoItemVert>
+                <InfoItemVert>
+                  <InfoLabel>Region</InfoLabel>
+                  <InfoValue>{country.region || '-'}</InfoValue>
+                </InfoItemVert>
+                <InfoItemVert>
+                  <InfoLabel>Sub-Region</InfoLabel>
+                  <InfoValue>{country.subregion || '-'}</InfoValue>
+                </InfoItemVert>
               </InfoItems>
               <InfoItems>
                 <InfoItemVert>

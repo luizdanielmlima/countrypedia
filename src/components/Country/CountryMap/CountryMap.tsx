@@ -6,9 +6,12 @@ import * as am4maps from '@amcharts/amcharts4/maps';
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow';
 import { CountryType } from '../../../models/Country';
 import { getMapZoomLevel } from '../../../utils/mapZoomLevel';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 export const CountryMapWrapper = styled.div`
-  border: 1px solid ${(props) => props.theme.colors.primary};
+  background-color: 1px solid ${(props) => props.theme.colors.primary};
+  /* border: 1px solid ${(props) => props.theme.colors.primary}; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,7 +20,9 @@ export const CountryMapWrapper = styled.div`
 const CountryMap: FC<{ countryData: CountryType }> = ({
   countryData,
 }) => {
-  // const mapRef = useRef(null);
+  const theme = useSelector(
+    (state: RootState) => state.countries.theme,
+  );
 
   useLayoutEffect(() => {
     let map = am4core.create('chartdiv', am4maps.MapChart);
@@ -27,6 +32,14 @@ const CountryMap: FC<{ countryData: CountryType }> = ({
 
     // Set projection
     map.projection = new am4maps.projections.Miller();
+
+    // Bg color
+    map.background.fill = am4core.color(
+      theme.colors.secondaryVariant
+        ? theme.colors.primary
+        : '#316794',
+    );
+    map.background.fillOpacity = 1;
 
     // Create map polygon series
     let polygonSeries = map.series.push(
@@ -39,17 +52,26 @@ const CountryMap: FC<{ countryData: CountryType }> = ({
     // Configure series
     let polygonTemplate = polygonSeries.mapPolygons.template;
     polygonTemplate.tooltipText = '{name}';
-    polygonTemplate.fill = am4core.color('#74B266');
+    polygonTemplate.fill = am4core.color(
+      theme.colors.secondaryVariant
+        ? theme.colors.secondaryVariant
+        : '#fcc',
+    );
+    polygonTemplate.stroke = am4core.color('#aaa');
 
     // Create hover state and set alternative fill color
     let hs = polygonTemplate.states.create('hover');
-    hs.properties.fill = am4core.color('#367B25');
+    hs.properties.fill = am4core.color(
+      theme.colors.secondary ? theme.colors.secondary : '#eaa',
+    );
 
     polygonSeries.data = [
       {
         id: countryData.cca2,
         name: countryData.commonName || '-',
-        fill: am4core.color('#F05C5C'),
+        fill: am4core.color(
+          theme.colors.secondary ? theme.colors.secondary : '#eaa',
+        ),
       },
     ];
 
@@ -66,14 +88,18 @@ const CountryMap: FC<{ countryData: CountryType }> = ({
     return () => {
       map.dispose();
     };
-  }, [countryData]);
+  }, [
+    countryData,
+    theme.colors.primary,
+    theme.colors.secondary,
+    theme.colors.secondaryVariant,
+  ]);
 
   return (
     <CountryMapWrapper>
-      {/* <img src="./map_placeholder.png" alt="map placeholder" /> */}
       <div
         id="chartdiv"
-        style={{ width: '100%', height: '200px' }}
+        style={{ width: '100%', height: '100%' }}
       ></div>
     </CountryMapWrapper>
   );
