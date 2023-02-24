@@ -3,6 +3,7 @@ import getCurrentForecast from '../../api/getCurrentForecast';
 import { CountryType } from '../../models/Country';
 import { Forecast, Weather } from '../../models/ForeCast';
 import { InfoLabel } from '../Country/Country.styled';
+import LoadingFeedback from '../LoadingFeedback/LoadingFeedback';
 import WeatherIcon from '../WeatherIcon';
 import {
   ForecastMain,
@@ -63,8 +64,12 @@ const CapitalForecast: FC<{ country: CountryType }> = ({
 
   return (
     <>
-      {!currentForecastLoading && currentForecast && (
-        <ForecastWrapper>
+      <ForecastWrapper>
+        {currentForecastLoading && <LoadingFeedback />}
+        {!currentForecastLoading && currentForecastError && (
+          <p>An error has occured.</p>
+        )}
+        {!currentForecastLoading && currentForecast && (
           <ForecastMain>
             <ForecastMainText>
               <InfoLabel>Forecast</InfoLabel>
@@ -88,8 +93,8 @@ const CapitalForecast: FC<{ country: CountryType }> = ({
               </ForecastTemperature>
             </ForecastTemperatures>
           </ForecastMain>
-        </ForecastWrapper>
-      )}
+        )}
+      </ForecastWrapper>
     </>
   );
 };

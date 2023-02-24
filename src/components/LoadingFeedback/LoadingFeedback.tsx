@@ -4,13 +4,14 @@ import styled from 'styled-components';
 import { BounceAnimation } from '../../styles/Animations.styled';
 
 const LoadingContainer = styled.div`
-  height: 278px;
+  height: 96px;
+  width: 100%;
   display: flex;
   align-items: center;
 `;
 
 const Dot = styled.div<{ delay: string }>`
-  background-color: ${(props) => props.theme.colors.white};
+  background-color: ${(props) => props.theme.colors.primary};
   border-radius: 50%;
   width: 10px;
   height: 10px;
