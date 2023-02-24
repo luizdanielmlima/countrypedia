@@ -27,7 +27,6 @@ const Country = () => {
   const country = useSelector(
     (state: RootState) => state.countries.country,
   );
-  console.log('country: ', country);
 
   return (
     <CountryWrapper>

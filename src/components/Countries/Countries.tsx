@@ -19,7 +19,8 @@ const Countries = () => {
   const { countries, countriesLoading, countriesError } =
     useGetAllCountries();
 
-  const [pageSize, setPageSize] = useState(32);
+  const [pageSize, setPageSize] = useState(30);
+  const [pageNumber, setPageNumber] = useState(1);
   const [totalItens, setTotalItens] = useState(0);
 
   const [selectedOrderBy, setSelectedOrderBy] =
@@ -32,9 +33,49 @@ const Countries = () => {
     }
   }, [countries, dispatch]);
 
-  const countriesOnTheList = useMemo(() => {
-    if (countries && countries.length > 0) {
-      let filteredData = [...countries].map((country) => {
+  // == PAGINATION (Start)
+  useEffect(() => {
+    setPageNumber(1);
+  }, [totalItens]);
+
+  // Antartica is NOT a country!
+  const fixCountries = useMemo(() => {
+    if (countries) {
+      return [...countries].filter(
+        (country) => country.cca3 !== 'ATA',
+      );
+    }
+    return [];
+  }, [countries]);
+
+  const numOfPages = useMemo(() => {
+    const pages = Math.ceil(totalItens / pageSize);
+    return pages;
+  }, [pageSize, totalItens]);
+
+  const onPaginationAction = (action: string) => {
+    if (action === 'first') {
+      setPageNumber(1);
+    }
+    if (action === 'previous') {
+      if (pageNumber !== 1) {
+        setPageNumber((prevState) => prevState - 1);
+      }
+    }
+    if (action === 'next') {
+      if (pageNumber !== numOfPages) {
+        setPageNumber((prevState) => prevState + 1);
+      }
+    }
+    if (action === 'last') {
+      setPageNumber(numOfPages);
+    }
+  };
+  // == PAGINATION (End)
+
+  const filteredCountries = useMemo(() => {
+    if (fixCountries && fixCountries.length > 0) {
+      let filteredData = [...fixCountries].map((country) => {
         return {
           ...country,
           commonName: country.name.common,
@@ -67,21 +108,23 @@ const Countries = () => {
           },
         );
       }
+      setPageNumber(1);
       setTotalItens(filteredData.length);
-      dispatch(countriesActions.setCountry(filteredData[0]));
-      return filteredData.slice(0, pageSize);
+      return filteredData;
     }
-  }, [
-    countries,
-    dispatch,
-    pageSize,
-    selectedOrderBy,
-    selectedRegion,
-  ]);
+  }, [fixCountries, selectedOrderBy, selectedRegion]);
 
-  const onPageChanged = (curPage: number) => {
-    console.log('curPage: ', curPage);
-  };
+  const countriesOnThePage = useMemo(() => {
+    if (filteredCountries && filteredCountries.length > 0) {
+      const data = filteredCountries.slice(
+        (pageNumber - 1) * pageSize,
+        pageNumber * pageSize,
+      );
+      dispatch(countriesActions.setCountry(data[0]));
+      return data;
+    }
+    return [];
+  }, [dispatch, filteredCountries, pageNumber, pageSize]);
 
   return (
     <CountriesWrapper>
@@ -91,7 +134,7 @@ const Countries = () => {
         </>
       )}
       {countriesError && <p>An error has occured.</p>}
-      {!countriesLoading && countriesOnTheList && (
+      {!countriesLoading && countriesOnThePage && (
         <>
           <CountriesListHeader>
             <Filters
@@ -101,15 +144,15 @@ const Countries = () => {
               onOrderBySelected={(sel) => setSelectedOrderBy(sel)}
             />
             <Pagination
-              pageSize={pageSize}
-              totalItens={totalItens}
-              handleChangePage={(pageNum: number) =>
-                onPageChanged(pageNum)
+              pageNumber={pageNumber}
+              numOfPages={numOfPages}
+              handlePaginationAction={(action: string) =>
+                onPaginationAction(action)
               }
             />
           </CountriesListHeader>
           <CountriesList>
-            {countriesOnTheList.map((country, index) => {
+            {countriesOnThePage.map((country, index) => {
               return (
                 <AnimatedEntrance
                   delay={index / 10}

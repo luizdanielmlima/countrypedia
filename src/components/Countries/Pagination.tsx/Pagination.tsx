@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from 'react';
+import React, { FC } from 'react';
 
 import {
   BsChevronLeft,
@@ -15,54 +15,36 @@ import {
 } from './Pagination.styled';
 
 interface PaginationProps {
-  pageSize: number;
-  totalItens: number;
-  handleChangePage: (pageNum: number) => void;
+  pageNumber: number;
+  numOfPages: number;
+  handlePaginationAction: (action: string) => void;
 }
 
 const Pagination: FC<PaginationProps> = ({
-  pageSize,
-  totalItens,
-  handleChangePage,
+  pageNumber,
+  numOfPages,
+  handlePaginationAction,
 }) => {
-  const [curPage, setcurPage] = useState(1);
-
-  const numOfPages = useMemo(() => {
-    const pages = Math.floor(totalItens / pageSize);
-    console.log('pages: ', pages);
-
-    return pages;
-  }, [pageSize, totalItens]);
-
-  const goToFirst = () => {
-    setcurPage(1);
-  };
-  const goToPrevious = () => {
-    if (curPage !== 1) {
-      setcurPage((prevState) => prevState - 1);
-    }
-  };
-  const goToNext = () => {
-    if (curPage !== numOfPages) {
-      setcurPage((prevState) => prevState + 1);
-    }
-  };
-  const goToLast = () => {
-    setcurPage(numOfPages);
-  };
-
   return (
     <PaginationWrapper>
-      <BsChevronDoubleLeft onClick={goToFirst} />
-      <BsChevronLeft onClick={goToPrevious} />
+      <BsChevronDoubleLeft
+        onClick={() => handlePaginationAction('first')}
+      />
+      <BsChevronLeft
+        onClick={() => handlePaginationAction('previous')}
+      />
       <PaginationInfo>
         <PaginationSeparator>Page</PaginationSeparator>
-        <PaginationValue>{curPage}</PaginationValue>
+        <PaginationValue>{pageNumber}</PaginationValue>
         <PaginationSeparator>of</PaginationSeparator>
         <PaginationValue>{numOfPages}</PaginationValue>
       </PaginationInfo>
-      <BsChevronRight onClick={goToNext} />
-      <BsChevronDoubleRight onClick={goToLast} />
+      <BsChevronRight
+        onClick={() => handlePaginationAction('next')}
+      />
+      <BsChevronDoubleRight
+        onClick={() => handlePaginationAction('last')}
+      />
     </PaginationWrapper>
   );
 };

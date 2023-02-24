@@ -25,7 +25,7 @@ export const PaginationInfo = styled.div`
 `;
 
 export const PaginationSeparator = styled.div`
-  margin: 2px;
+  margin: -6px;
 `;
 
 export const PaginationValue = styled.div`

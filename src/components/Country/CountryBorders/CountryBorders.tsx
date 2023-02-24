@@ -49,7 +49,6 @@ const CountryBorders: FC<{ borders: string[] }> = ({ borders }) => {
           country.cca2 === countryCode ||
           country.cca3 === countryCode,
       );
-      console.log('foundCountry: ', foundCountry);
 
       if (foundCountry) {
         dispatch(countriesActions.setCountry(foundCountry));
