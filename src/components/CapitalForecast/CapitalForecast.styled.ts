@@ -21,13 +21,13 @@ export const ForecastMainText = styled.div`
 
 export const ForecastTemperatures = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: ${(props) => props.theme.spacings.small};
 `;
 
 export const ForecastTemperature = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
 
   p:not(:first-child) {

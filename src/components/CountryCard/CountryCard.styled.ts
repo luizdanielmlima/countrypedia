@@ -74,7 +74,7 @@ export const CountryCardWrapper = styled.div<{ selected: boolean }>`
   flex-direction: column;
   justify-content: space-between;
 
-  transition: all 300ms ease-in;
+  transition: all 200ms ease-in;
 
   &:hover {
     box-shadow: ${(props) => props.theme.shadows.xLarge};

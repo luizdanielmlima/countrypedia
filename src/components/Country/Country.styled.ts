@@ -18,6 +18,8 @@ export const ContryContentWrapper = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  transition: all 200ms ease-in;
 `;
 
 export const CountryHeader = styled.div`

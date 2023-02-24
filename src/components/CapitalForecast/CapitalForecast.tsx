@@ -77,18 +77,17 @@ const CapitalForecast: FC<{ country: CountryType }> = ({
             {weatherCondition && (
               <WeatherIcon condition={weatherCondition} />
             )}
+            <ForecastTemperatures>
+              <ForecastTemperature>
+                <p>Min:&nbsp;</p>
+                <p>{Math.round(currentForecast.main.temp_min)}°C</p>
+              </ForecastTemperature>
+              <ForecastTemperature>
+                <p>Max&nbsp;</p>
+                <p>{Math.round(currentForecast.main.temp_max)}°C</p>
+              </ForecastTemperature>
+            </ForecastTemperatures>
           </ForecastMain>
-          <ForecastTemperatures>
-            <ForecastTemperature>
-              <p>Min</p>
-              <p>{Math.round(currentForecast.main.temp_min)}°C</p>
-            </ForecastTemperature>
-            <ForecastTemperature>
-              <p>Max</p>
-
-              <p>{Math.round(currentForecast.main.temp_max)}°C</p>
-            </ForecastTemperature>
-          </ForecastTemperatures>
         </ForecastWrapper>
       )}
     </>
