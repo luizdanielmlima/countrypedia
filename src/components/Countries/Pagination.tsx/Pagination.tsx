@@ -8,6 +8,7 @@ import {
 } from 'react-icons/bs';
 
 import {
+  PageTotals,
   PaginationInfo,
   PaginationSeparator,
   PaginationValue,
@@ -17,16 +18,22 @@ import {
 interface PaginationProps {
   pageNumber: number;
   numOfPages: number;
+  pageItens: number;
   handlePaginationAction: (action: string) => void;
 }
 
 const Pagination: FC<PaginationProps> = ({
   pageNumber,
   numOfPages,
+  pageItens,
   handlePaginationAction,
 }) => {
   return (
     <PaginationWrapper>
+      <PageTotals>
+        <p>Countries:&nbsp;</p>
+        <p>{pageItens}</p>
+      </PageTotals>
       <BsChevronDoubleLeft
         onClick={() => handlePaginationAction('first')}
       />

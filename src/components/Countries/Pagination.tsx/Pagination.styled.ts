@@ -24,8 +24,18 @@ export const PaginationInfo = styled.div`
   justify-content: center;
 `;
 
-export const PaginationSeparator = styled.div`
+export const PaginationSeparator = styled.p`
   margin: -6px;
+`;
+
+export const PageTotals = styled.div`
+  margin-right: ${(props) => props.theme.spacings.small};
+  display: flex;
+  align-items: center;
+
+  p:last-child {
+    font-weight: 600;
+  }
 `;
 
 export const PaginationValue = styled.div`

@@ -146,6 +146,7 @@ const Countries = () => {
             <Pagination
               pageNumber={pageNumber}
               numOfPages={numOfPages}
+              pageItens={totalItens}
               handlePaginationAction={(action: string) =>
                 onPaginationAction(action)
               }
