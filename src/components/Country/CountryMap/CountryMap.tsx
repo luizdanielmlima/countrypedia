@@ -33,11 +33,7 @@ const CountryMap: FC<{ countryData: CountryType }> = ({
     map.projection = new am4maps.projections.Miller();
 
     // Bg color
-    map.background.fill = am4core.color(
-      theme.colors.secondaryVariant
-        ? theme.colors.primary
-        : '#316794',
-    );
+    map.background.fill = am4core.color('#087f8c');
     map.background.fillOpacity = 1;
 
     // Create map polygon series
@@ -56,7 +52,9 @@ const CountryMap: FC<{ countryData: CountryType }> = ({
         ? theme.colors.secondaryVariant
         : '#fcc',
     );
-    polygonTemplate.stroke = am4core.color('#aaa');
+    polygonTemplate.stroke = am4core.color(
+      theme.colors.background ? theme.colors.background : '#ccc',
+    );
 
     // Create hover state and set alternative fill color
     let hs = polygonTemplate.states.create('hover');
