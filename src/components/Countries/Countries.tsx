@@ -15,10 +15,12 @@ import Filters from './Filters';
 import Pagination from './Pagination.tsx/Pagination';
 
 const Countries = () => {
-  const pageSize = 32;
   const dispatch = useDispatch();
   const { countries, countriesLoading, countriesError } =
     useGetAllCountries();
+
+  const [pageSize, setPageSize] = useState(32);
+  const [totalItens, setTotalItens] = useState(0);
 
   const [selectedOrderBy, setSelectedOrderBy] =
     useState('commonName');
@@ -65,10 +67,21 @@ const Countries = () => {
           },
         );
       }
+      setTotalItens(filteredData.length);
       dispatch(countriesActions.setCountry(filteredData[0]));
       return filteredData.slice(0, pageSize);
     }
-  }, [countries, dispatch, selectedOrderBy, selectedRegion]);
+  }, [
+    countries,
+    dispatch,
+    pageSize,
+    selectedOrderBy,
+    selectedRegion,
+  ]);
+
+  const onPageChanged = (curPage: number) => {
+    console.log('curPage: ', curPage);
+  };
 
   return (
     <CountriesWrapper>
@@ -87,7 +100,13 @@ const Countries = () => {
               onRegionSelected={(sel) => setSelectedRegion(sel)}
               onOrderBySelected={(sel) => setSelectedOrderBy(sel)}
             />
-            <Pagination />
+            <Pagination
+              pageSize={pageSize}
+              totalItens={totalItens}
+              handleChangePage={(pageNum: number) =>
+                onPageChanged(pageNum)
+              }
+            />
           </CountriesListHeader>
           <CountriesList>
             {countriesOnTheList.map((country, index) => {

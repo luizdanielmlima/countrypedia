@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, useMemo, useState } from 'react';
 
 import {
   BsChevronLeft,
@@ -14,19 +14,55 @@ import {
   PaginationWrapper,
 } from './Pagination.styled';
 
-const Pagination = () => {
+interface PaginationProps {
+  pageSize: number;
+  totalItens: number;
+  handleChangePage: (pageNum: number) => void;
+}
+
+const Pagination: FC<PaginationProps> = ({
+  pageSize,
+  totalItens,
+  handleChangePage,
+}) => {
+  const [curPage, setcurPage] = useState(1);
+
+  const numOfPages = useMemo(() => {
+    const pages = Math.floor(totalItens / pageSize);
+    console.log('pages: ', pages);
+
+    return pages;
+  }, [pageSize, totalItens]);
+
+  const goToFirst = () => {
+    setcurPage(1);
+  };
+  const goToPrevious = () => {
+    if (curPage !== 1) {
+      setcurPage((prevState) => prevState - 1);
+    }
+  };
+  const goToNext = () => {
+    if (curPage !== numOfPages) {
+      setcurPage((prevState) => prevState + 1);
+    }
+  };
+  const goToLast = () => {
+    setcurPage(numOfPages);
+  };
+
   return (
     <PaginationWrapper>
-      <BsChevronLeft />
-      <BsChevronDoubleLeft />
+      <BsChevronDoubleLeft onClick={goToFirst} />
+      <BsChevronLeft onClick={goToPrevious} />
       <PaginationInfo>
         <PaginationSeparator>Page</PaginationSeparator>
-        <PaginationValue>1</PaginationValue>
+        <PaginationValue>{curPage}</PaginationValue>
         <PaginationSeparator>of</PaginationSeparator>
-        <PaginationValue>5</PaginationValue>
+        <PaginationValue>{numOfPages}</PaginationValue>
       </PaginationInfo>
-      <BsChevronRight />
-      <BsChevronDoubleRight />
+      <BsChevronRight onClick={goToNext} />
+      <BsChevronDoubleRight onClick={goToLast} />
     </PaginationWrapper>
   );
 };
