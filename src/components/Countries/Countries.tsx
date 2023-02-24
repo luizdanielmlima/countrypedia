@@ -5,6 +5,7 @@ import { CountryType } from '../../models/Country';
 import { countriesActions } from '../../store/countries';
 import { AnimatedEntrance } from '../../styles/Animations.styled';
 import Country from '../CountryCard';
+import LoadingFeedback from '../LoadingFeedback/LoadingFeedback';
 import { CountriesList, CountriesWrapper } from './Countries.styled';
 import Filters from './Filters';
 
@@ -66,7 +67,11 @@ const Countries = () => {
 
   return (
     <CountriesWrapper>
-      {countriesLoading && <p>Loading...</p>}
+      {countriesLoading && (
+        <>
+          <LoadingFeedback />
+        </>
+      )}
       {countriesError && <p>An error has occured.</p>}
       {!countriesLoading && countriesOnTheList && (
         <>

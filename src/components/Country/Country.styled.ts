@@ -6,7 +6,8 @@ export const CountryWrapper = styled.div`
 `;
 
 export const ContryContentWrapper = styled.div`
-  min-height: calc(100vh - 220px);
+  height: calc(100vh - 220px);
+  max-height: calc(100vh - 220px);
   overflow-y: auto;
   padding: ${(props) =>
     `${props.theme.spacings.large} ${props.theme.spacings.large}`};
