@@ -44,6 +44,7 @@ export const HeaderRightSide = styled.div`
     font-size: ${(props) => props.theme.fontSizes.xSmall};
     color: ${(props) => props.theme.colors.secondary} !important;
     text-decoration: none;
+    font-weight: 600;
   }
 
   a:hover,

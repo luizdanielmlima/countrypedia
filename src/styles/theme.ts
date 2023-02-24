@@ -69,12 +69,12 @@ export const darkTheme: ThemeModel = {
     xxLarge: '48px',
   },
   colors: {
-    background: '#111',
-    surface: '#222',
-    primary: '#e0e0e0',
-    primaryVariant: '#eaeaea',
-    secondary: '#d0d0d0',
-    secondaryVariant: '#dadada',
+    background: '#2E3135',
+    surface: '#49545B',
+    primary: '#D5E9EA',
+    primaryVariant: '#A0D2D5',
+    secondary: '#ACA7CB',
+    secondaryVariant: '#ACA9BB',
     tertiary: '#c0c0c0',
     tertiaryVariant: '#cacaca',
   },
@@ -85,26 +85,26 @@ export const darkTheme: ThemeModel = {
     xLarge: '20px',
   },
   shadows: {
-    xSmall: '0px 1px 2px rgba(255, 250, 205, 0.05)',
+    xSmall: '0px 1px 2px rgba(172, 167, 203, 0.05)',
     small:
-      '0px 1px 3px rgba(255, 250, 205, 0.1), 0px 1px 2px -1px rgba(255, 250, 205, 0.1)',
+      '0px 1px 3px rgba(172, 167, 203, 0.1), 0px 1px 2px -1px rgba(172, 167, 203, 0.1)',
     medium:
-      '0px 4px 6px -1px rgba(255, 250, 205, 0.1), 0px 2px 4px -2px rgba(255, 250, 205, 0.1)',
+      '0px 4px 6px -1px rgba(172, 167, 203, 0.1), 0px 2px 4px -2px rgba(172, 167, 203, 0.1)',
     large:
-      '0px 10px 15px -3px rgba(255, 250, 205, 0.1), 0px 4px 6px -4px rgba(255, 250, 205, 0.1)',
+      '0px 10px 15px -3px rgba(172, 167, 203, 0.1), 0px 4px 6px -4px rgba(172, 167, 203, 0.1)',
     xLarge:
-      '0px 20px 25px -5px rgba(255, 250, 205, 0.1), 0px 8px 10px -6px rgba(255, 250, 205, 0.1)',
-    xxLarge: '0px 25px 50px -12px rgba(255, 250, 205, 0.25)',
-    upXSmall: '0px -1px 2px rgba(255, 250, 205, 0.05)',
+      '0px 20px 25px -5px rgba(172, 167, 203, 0.1), 0px 8px 10px -6px rgba(172, 167, 203, 0.1)',
+    xxLarge: '0px 25px 50px -12px rgba(172, 167, 203, 0.25)',
+    upXSmall: '0px -1px 2px rgba(172, 167, 203, 0.05)',
     upSmall:
-      '0px -1px 3px rgba(255, 250, 205, 0.1), 0px -1px 2px -1px rgba(255, 250, 205, 0.1)',
+      '0px -1px 3px rgba(172, 167, 203, 0.1), 0px -1px 2px -1px rgba(172, 167, 203, 0.1)',
     upMedium:
-      '0px -4px 6px -1px rgba(255, 250, 205, 0.1), 0px -2px 4px -2px rgba(255, 250, 205, 0.1)',
+      '0px -4px 6px -1px rgba(172, 167, 203, 0.1), 0px -2px 4px -2px rgba(172, 167, 203, 0.1)',
     upLarge:
-      '0px -10px 15px -3px rgba(255, 250, 205, 0.1), 0px -4px 6px -4px rgba(255, 250, 205, 0.1)',
+      '0px -10px 15px -3px rgba(172, 167, 203, 0.1), 0px -4px 6px -4px rgba(172, 167, 203, 0.1)',
     upXLarge:
-      '0px -20px 25px -5px rgba(255, 250, 205, 0.1), 0px -8px 10px -6px rgba(255, 250, 205, 0.1)',
-    upXxLarge: '0px -25px 50px -12px rgba(16, 24, 40, 0.25)',
+      '0px -20px 25px -5px rgba(172, 167, 203, 0.1), 0px -8px 10px -6px rgba(172, 167, 203, 0.1)',
+    upXxLarge: '0px -25px 50px -12px rgba(172, 167, 203, 0.25)',
   },
 };
 
@@ -116,8 +116,8 @@ export const lightTheme: ThemeModel = {
     surface: '#efefef',
     primary: '#087f8c',
     primaryVariant: '#00A9C8',
-    secondary: '#FF8D3F',
-    secondaryVariant: '#9D6C4D',
+    secondary: '#FF9A6C',
+    secondaryVariant: '#F3DEDD',
     tertiary: '#98684C',
     tertiaryVariant: '#D09C7D',
   },
