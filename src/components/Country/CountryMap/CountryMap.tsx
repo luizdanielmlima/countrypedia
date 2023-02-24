@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect } from 'react';
+import React, { FC, useLayoutEffect, useCallback } from 'react';
 import styled from 'styled-components';
 
 import * as am4core from '@amcharts/amcharts4/core';
@@ -6,8 +6,9 @@ import * as am4maps from '@amcharts/amcharts4/maps';
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow';
 import { CountryType } from '../../../models/Country';
 import { getMapZoomLevel } from '../../../utils/mapZoomLevel';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
+import { countriesActions } from '../../../store/countries';
 
 export const CountryMapWrapper = styled.div`
   background-color: 1px solid ${(props) => props.theme.colors.primary};
@@ -16,11 +17,38 @@ export const CountryMapWrapper = styled.div`
   justify-content: center;
 `;
 
+interface CountryInfo {
+  id: string;
+  madeFromGeoData: boolean;
+  multiPolygon: any;
+  name: string;
+}
+
 const CountryMap: FC<{ countryData: CountryType }> = ({
   countryData,
 }) => {
   const theme = useSelector(
     (state: RootState) => state.countries.theme,
+  );
+
+  const countries = useSelector(
+    (state: RootState) => state.countries.countries,
+  );
+  const dispatch = useDispatch();
+
+  const handleSelectedCountry = useCallback(
+    (countryCode: string) => {
+      if (!countries || countries?.length === 0) return null;
+
+      const foundCountry = countries?.find(
+        (country) => country.cca2 === countryCode,
+      );
+
+      if (foundCountry) {
+        dispatch(countriesActions.setCountry(foundCountry));
+      }
+    },
+    [countries, dispatch],
   );
 
   useLayoutEffect(() => {
@@ -75,18 +103,27 @@ const CountryMap: FC<{ countryData: CountryType }> = ({
     polygonTemplate.propertyFields.fill = 'fill';
 
     // Center on Country
-    // map.deltaLongitude = countryData.latlng[1];
     map.homeZoomLevel = getMapZoomLevel(countryData.area) || 7;
     map.homeGeoPoint = {
       latitude: countryData.latlng[0],
       longitude: countryData.latlng[1],
     };
 
+    // Click on country
+    polygonTemplate.events.on('hit', function (ev) {
+      // get object info
+      const countryInfo = ev.target.dataItem
+        .dataContext as CountryInfo;
+      handleSelectedCountry(countryInfo.id);
+    });
+
     return () => {
       map.dispose();
     };
   }, [
     countryData,
+    handleSelectedCountry,
+    theme.colors.background,
     theme.colors.primary,
     theme.colors.secondary,
     theme.colors.secondaryVariant,

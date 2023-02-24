@@ -22,7 +22,6 @@ import Currencies from './Currencies';
 import Languages from './Languages';
 import CountryBorders from './CountryBorders';
 import CapitalForecast from '../CapitalForecast';
-import LocalTime from '../LocalTime';
 
 const Country = () => {
   const country = useSelector(
