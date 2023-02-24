@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ForecastWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: ${(props) => props.theme.spacings.medium};
 `;
 

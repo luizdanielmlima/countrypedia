@@ -2,8 +2,9 @@ import React, { useEffect, useMemo, useState, FC } from 'react';
 import getCurrentForecast from '../../api/getCurrentForecast';
 import { CountryType } from '../../models/Country';
 import { Forecast, Weather } from '../../models/ForeCast';
-import { InfoLabel } from '../Country/Country.styled';
+import { InfoItemHoriz, InfoLabel } from '../Country/Country.styled';
 import LoadingFeedback from '../LoadingFeedback/LoadingFeedback';
+import LocalTime from '../LocalTime';
 import WeatherIcon from '../WeatherIcon';
 import {
   ForecastMain,
@@ -70,29 +71,37 @@ const CapitalForecast: FC<{ country: CountryType }> = ({
           <p>An error has occured.</p>
         )}
         {!currentForecastLoading && currentForecast && (
-          <ForecastMain>
-            <ForecastMainText>
-              <InfoLabel>Forecast</InfoLabel>
-              <h4>
-                {currentForecast.weather &&
-                  currentForecast.weather.length > 0 &&
-                  currentForecast.weather[0].main}
-              </h4>
-            </ForecastMainText>
-            {weatherCondition && (
-              <WeatherIcon condition={weatherCondition} />
-            )}
-            <ForecastTemperatures>
-              <ForecastTemperature>
-                <p>Min:&nbsp;</p>
-                <p>{Math.round(currentForecast.main.temp_min)}°C</p>
-              </ForecastTemperature>
-              <ForecastTemperature>
-                <p>Max&nbsp;</p>
-                <p>{Math.round(currentForecast.main.temp_max)}°C</p>
-              </ForecastTemperature>
-            </ForecastTemperatures>
-          </ForecastMain>
+          <>
+            <ForecastMain>
+              <ForecastMainText>
+                <InfoLabel>Forecast</InfoLabel>
+                <h4>
+                  {currentForecast.weather &&
+                    currentForecast.weather.length > 0 &&
+                    currentForecast.weather[0].main}
+                </h4>
+              </ForecastMainText>
+              {weatherCondition && (
+                <WeatherIcon condition={weatherCondition} />
+              )}
+              <ForecastTemperatures>
+                <ForecastTemperature>
+                  <p>Min:&nbsp;</p>
+                  <p>{Math.round(currentForecast.main.temp_min)}°C</p>
+                </ForecastTemperature>
+                <ForecastTemperature>
+                  <p>Max&nbsp;</p>
+                  <p>{Math.round(currentForecast.main.temp_max)}°C</p>
+                </ForecastTemperature>
+              </ForecastTemperatures>
+            </ForecastMain>
+            <InfoItemHoriz>
+              <InfoLabel>Local Time</InfoLabel>
+              {currentForecast.timezone && (
+                <LocalTime timezone={currentForecast.timezone} />
+              )}
+            </InfoItemHoriz>
+          </>
         )}
       </ForecastWrapper>
     </>
