@@ -10,13 +10,13 @@ export const CountryCardHeader = styled.div`
 
 export const CountryCardTitle = styled.p<{ fontSize: string }>`
   color: ${(props) => props.theme.colors.primary};
-  font-size: ${({ fontSize }) => fontSize};
+  font-size: ${({ fontSize }) => fontSize} !important;
   font-weight: 600;
 `;
 
 export const CountryCardRegion = styled.p`
-  font-size: 0.7rem;
   font-weight: 400;
+  font-size: ${(props) => props.theme.fontSizes.xxSmall} !important;
 `;
 
 export const CountryCardFlagWrapper = styled.figure<{
@@ -31,7 +31,7 @@ export const CountryCardFlagWrapper = styled.figure<{
   justify-content: center;
 
   img {
-    filter: ${({ theme, selected }) =>
+    filter: ${({ selected }) =>
       selected ? 'grayscale(0%)' : 'grayscale(80%)'};
     width: auto;
     height: auto;

@@ -12,3 +12,9 @@ export const CountriesList = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   grid-gap: ${(props) => props.theme.spacings.medium};
 `;
+
+export const CountriesListHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;

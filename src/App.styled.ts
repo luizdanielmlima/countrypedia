@@ -7,6 +7,10 @@ export const AppWrapper = styled.div`
   padding: ${(props) => props.theme.spacings.xxLarge};
   padding-top: 0;
 
+  p {
+    font-size: ${(props) => props.theme.fontSizes.xSmall};
+  }
+
   h1,
   h2,
   h3,

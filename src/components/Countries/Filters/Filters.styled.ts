@@ -11,7 +11,7 @@ export const FilterWrapper = styled.div`
   }
 
   select {
-    width: 160px;
+    width: 140px;
     background-color: ${(props) => props.theme.colors.surface};
     color: ${(props) => props.theme.colors.primary};
     padding: 8px;

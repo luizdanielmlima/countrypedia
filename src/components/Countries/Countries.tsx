@@ -6,8 +6,13 @@ import { countriesActions } from '../../store/countries';
 import { AnimatedEntrance } from '../../styles/Animations.styled';
 import Country from '../CountryCard';
 import LoadingFeedback from '../LoadingFeedback/LoadingFeedback';
-import { CountriesList, CountriesWrapper } from './Countries.styled';
+import {
+  CountriesList,
+  CountriesListHeader,
+  CountriesWrapper,
+} from './Countries.styled';
 import Filters from './Filters';
+import Pagination from './Pagination.tsx/Pagination';
 
 const Countries = () => {
   const pageSize = 32;
@@ -75,12 +80,15 @@ const Countries = () => {
       {countriesError && <p>An error has occured.</p>}
       {!countriesLoading && countriesOnTheList && (
         <>
-          <Filters
-            region={selectedRegion}
-            orderBy={selectedOrderBy}
-            onRegionSelected={(sel) => setSelectedRegion(sel)}
-            onOrderBySelected={(sel) => setSelectedOrderBy(sel)}
-          />
+          <CountriesListHeader>
+            <Filters
+              region={selectedRegion}
+              orderBy={selectedOrderBy}
+              onRegionSelected={(sel) => setSelectedRegion(sel)}
+              onOrderBySelected={(sel) => setSelectedOrderBy(sel)}
+            />
+            <Pagination />
+          </CountriesListHeader>
           <CountriesList>
             {countriesOnTheList.map((country, index) => {
               return (

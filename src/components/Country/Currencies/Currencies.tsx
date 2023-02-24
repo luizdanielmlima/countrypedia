@@ -14,6 +14,10 @@ export const CurrencyItem = styled.div`
   align-items: center;
   justify-content: flex-start;
 
+  p {
+    font-size: ${(props) => props.theme.fontSizes.medium};
+  }
+
   p:not(:first-child) {
     margin: 0 ${(props) => props.theme.spacings.xxSmall};
   }

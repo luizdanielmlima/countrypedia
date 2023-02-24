@@ -52,9 +52,9 @@ export interface ThemeModel {
 export const darkTheme: ThemeModel = {
   name: 'dark',
   fontSizes: {
-    xxSmall: '16px',
-    xSmall: '20px',
-    small: '24px',
+    xxSmall: '12px',
+    xSmall: '16px',
+    small: '20px',
     medium: '28px',
     large: '32px',
     xLarge: '44px',
