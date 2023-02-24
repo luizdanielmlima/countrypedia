@@ -3,7 +3,12 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from '../../store';
 import ThemeSwitcher from '../ThemeSwitcher';
-import { HeaderLogoStyled, HeaderWrapper } from './Header.styled';
+import {
+  HeaderCredits,
+  HeaderLogoStyled,
+  HeaderRightSide,
+  HeaderWrapper,
+} from './Header.styled';
 
 const Header = () => {
   const theme = useSelector(
@@ -13,7 +18,20 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <HeaderLogoStyled color={theme.colors.primary} />
-      <ThemeSwitcher />
+      <HeaderRightSide>
+        <HeaderCredits>
+          <p>Developed by &nbsp; </p>
+          <a
+            href="http://luizdaniellima.com.br"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="my website"
+          >
+            Luiz Daniel Lima
+          </a>
+        </HeaderCredits>
+        <ThemeSwitcher />
+      </HeaderRightSide>
     </HeaderWrapper>
   );
 };

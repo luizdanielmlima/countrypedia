@@ -14,7 +14,7 @@ export const ContryContentWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.surface};
   border: 1px solid ${(props) => props.theme.colors.surface};
   border-radius: ${(props) => props.theme.borderRadius.small};
-  box-shadow: ${(props) => props.theme.shadows.xSmall};
+  box-shadow: ${(props) => props.theme.shadows.large};
 
   display: flex;
   flex-direction: column;

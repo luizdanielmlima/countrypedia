@@ -117,7 +117,7 @@ export const lightTheme: ThemeModel = {
     primary: '#087f8c',
     primaryVariant: '#00A9C8',
     secondary: '#FF8D3F',
-    secondaryVariant: '#FFE8D1',
+    secondaryVariant: '#9D6C4D',
     tertiary: '#98684C',
     tertiaryVariant: '#D09C7D',
   },
