@@ -24,7 +24,7 @@ const Countries = () => {
   const [totalItens, setTotalItens] = useState(0);
 
   const [selectedOrderBy, setSelectedOrderBy] =
-    useState('commonName');
+    useState('population');
   const [selectedRegion, setSelectedRegion] = useState('all');
 
   useEffect(() => {
