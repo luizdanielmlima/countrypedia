@@ -1,25 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
+
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { useSelector } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
+
 import './App.css';
+import { AppWrapper } from './App.styled';
+import Home from './pages/Home';
+import { RootState } from './store';
 
 function App() {
+  const queryClient = new QueryClient();
+  const theme = useSelector(
+    (state: RootState) => state.countries.theme,
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <AppWrapper>
+          <Home />
+        </AppWrapper>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 
