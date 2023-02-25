@@ -19,7 +19,7 @@ const Countries = () => {
   const { countries, countriesLoading, countriesError } =
     useGetAllCountries();
 
-  const [pageSize, setPageSize] = useState(30);
+  const [pageSize] = useState(30);
   const [pageNumber, setPageNumber] = useState(1);
   const [totalItens, setTotalItens] = useState(0);
 
