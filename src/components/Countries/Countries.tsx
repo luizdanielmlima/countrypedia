@@ -33,11 +33,6 @@ const Countries = () => {
     }
   }, [countries, dispatch]);
 
-  // == PAGINATION (Start)
-  useEffect(() => {
-    setPageNumber(1);
-  }, [totalItens]);
-
   // Antartica is NOT a country!
   const fixCountries = useMemo(() => {
     if (countries) {
@@ -47,6 +42,11 @@ const Countries = () => {
     }
     return [];
   }, [countries]);
+
+  // == PAGINATION (Start)
+  useEffect(() => {
+    setPageNumber(1);
+  }, [totalItens]);
 
   const numOfPages = useMemo(() => {
     const pages = Math.ceil(totalItens / pageSize);

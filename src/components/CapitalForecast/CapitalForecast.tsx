@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo, useState, FC } from 'react';
-import getCurrentForecast from '../../api/getCurrentForecast';
+import React, { useMemo, FC } from 'react';
+
+import useGetForecast from '../../api/useGetForecast';
 import { CountryType } from '../../models/Country';
-import { Forecast, Weather } from '../../models/ForeCast';
+import { Weather } from '../../models/ForeCast';
 import { InfoItemHoriz, InfoLabel } from '../Country/Country.styled';
 import LoadingFeedback from '../LoadingFeedback/LoadingFeedback';
 import LocalTime from '../LocalTime';
@@ -17,35 +18,15 @@ import {
 const CapitalForecast: FC<{ country: CountryType }> = ({
   country,
 }) => {
-  const [currentForecast, setCurrentForecast] = useState<Forecast>();
-  const [currentForecastLoading, setCurrentForecastLoading] =
-    useState(false);
-  const [currentForecastError, setCurrentForecastError] =
-    useState(false);
-
-  useEffect(() => {
-    if (country && country.capital.length > 0) {
-      const city = {
-        name: country.capital[0],
-        lat: country.capitalInfo.latlng[0],
-        lon: country.capitalInfo.latlng[1],
-      };
-      const fetchData = async () => {
-        setCurrentForecastLoading(true);
-        const response = await getCurrentForecast(
-          city.lat,
-          city.lon,
-          'metric',
-        );
-        const json = await response.json();
-        setCurrentForecast(json);
-      };
-
-      fetchData()
-        .catch((err) => setCurrentForecastError(err))
-        .finally(() => setCurrentForecastLoading(false));
-    }
-  }, [country]);
+  const {
+    currentForecast,
+    currentForecastLoading,
+    currentForecastError,
+  } = useGetForecast(
+    country.capitalInfo.latlng[0],
+    country.capitalInfo.latlng[1],
+    'metric',
+  );
 
   const weatherCondition = useMemo(() => {
     if (
@@ -64,17 +45,19 @@ const CapitalForecast: FC<{ country: CountryType }> = ({
   }, [currentForecast]);
 
   return (
-    <>
-      <ForecastWrapper>
+    <ForecastWrapper>
+      <>
         {currentForecastLoading && <LoadingFeedback />}
+
         {!currentForecastLoading && currentForecastError && (
           <p>An error has occured.</p>
         )}
+
         {!currentForecastLoading && currentForecast && (
           <>
             <ForecastMain>
               <ForecastMainText>
-                <InfoLabel>Forecast</InfoLabel>
+                <InfoLabel>Forecast {currentForecast.name}</InfoLabel>
                 <h4>
                   {currentForecast.weather &&
                     currentForecast.weather.length > 0 &&
@@ -103,8 +86,8 @@ const CapitalForecast: FC<{ country: CountryType }> = ({
             </InfoItemHoriz>
           </>
         )}
-      </ForecastWrapper>
-    </>
+      </>
+    </ForecastWrapper>
   );
 };
 
