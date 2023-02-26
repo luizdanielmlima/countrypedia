@@ -57,7 +57,7 @@ const CapitalForecast: FC<{ country: CountryType }> = ({
           <>
             <ForecastMain>
               <ForecastMainText>
-                <InfoLabel>Forecast {currentForecast.name}</InfoLabel>
+                <InfoLabel>Forecast</InfoLabel>
                 <h4>
                   {currentForecast.weather &&
                     currentForecast.weather.length > 0 &&

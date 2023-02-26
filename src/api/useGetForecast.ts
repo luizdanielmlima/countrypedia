@@ -11,7 +11,7 @@ const useGetForecast = (
   units: string = 'metric',
 ) => {
   const { isLoading, error, data } = useQuery({
-    queryKey: [`${lat}_forecast`], // dynamic querykey to avoid caching
+    queryKey: ['forecast', lat, lon], // dynamic querykey to avoid caching
     queryFn: async () => {
       const response = await fetch(
         `${openWeatherAPIUrl}/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`,
