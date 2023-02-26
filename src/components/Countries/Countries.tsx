@@ -33,11 +33,11 @@ const Countries = () => {
     }
   }, [countries, dispatch]);
 
-  // Antartica is NOT a country!
+  // NO COUNTRIES in Antartica ;)
   const fixCountries = useMemo(() => {
     if (countries) {
       return [...countries].filter(
-        (country) => country.cca3 !== 'ATA',
+        (country) => country.region !== 'Antarctic',
       );
     }
     return [];
