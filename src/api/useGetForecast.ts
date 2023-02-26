@@ -1,5 +1,4 @@
 import { useQuery } from 'react-query';
-import { CountryType } from '../models/Country';
 import { Forecast } from '../models/ForeCast';
 import { openWeatherAPIUrl } from './constants';
 
