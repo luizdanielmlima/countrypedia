@@ -85,7 +85,10 @@ const Country = () => {
                 </InfoItemVert>
                 <InfoItemVert>
                   <InfoValue>
-                    <CapitalForecast country={country} />
+                    {country.capital?.length > 0 &&
+                      country.capital[0] && (
+                        <CapitalForecast country={country} />
+                      )}
                   </InfoValue>
                 </InfoItemVert>
               </InfoItems>

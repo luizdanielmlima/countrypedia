@@ -1,5 +1,4 @@
 import React, { FC, useLayoutEffect, useCallback } from 'react';
-import styled from 'styled-components';
 
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4maps from '@amcharts/amcharts4/maps';
@@ -10,16 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { countriesActions } from '../../../store/countries';
 
-export const CountryMapWrapper = styled.div`
-  background-color: 1px solid ${(props) => props.theme.colors.primary};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 interface CountryInfo {
   id: string;
-  madeFromGeoData: boolean;
   multiPolygon: any;
   name: string;
 }
@@ -130,12 +121,12 @@ const CountryMap: FC<{ countryData: CountryType }> = ({
   ]);
 
   return (
-    <CountryMapWrapper>
+    <>
       <div
         id="chartdiv"
         style={{ width: '100%', height: '100%' }}
       ></div>
-    </CountryMapWrapper>
+    </>
   );
 };
 

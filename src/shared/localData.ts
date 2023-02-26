@@ -19,7 +19,7 @@ export const removeLocalDB = (key: string) => {
       // console.log('DB removed!', value);
     })
     .catch((err) => {
-      console.error('Error removing countries from local DB!');
+      console.error(`Error removing ${key} from local DB!`);
       return err;
     });
 };

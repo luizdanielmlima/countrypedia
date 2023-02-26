@@ -33,20 +33,20 @@ const Countries = () => {
     }
   }, [countries, dispatch]);
 
-  // == PAGINATION (Start)
-  useEffect(() => {
-    setPageNumber(1);
-  }, [totalItens]);
-
-  // Antartica is NOT a country!
+  // NO COUNTRIES in Antartica ;)
   const fixCountries = useMemo(() => {
     if (countries) {
       return [...countries].filter(
-        (country) => country.cca3 !== 'ATA',
+        (country) => country.region !== 'Antarctic',
       );
     }
     return [];
   }, [countries]);
+
+  // == PAGINATION (Start)
+  useEffect(() => {
+    setPageNumber(1);
+  }, [totalItens]);
 
   const numOfPages = useMemo(() => {
     const pages = Math.ceil(totalItens / pageSize);
