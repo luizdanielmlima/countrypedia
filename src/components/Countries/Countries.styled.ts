@@ -18,3 +18,10 @@ export const CountriesListHeader = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+
+export const LoadingWrapper = styled.div`
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
