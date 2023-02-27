@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { down } from 'styled-breakpoints';
 import { BsPeopleFill } from 'react-icons/bs';
 
 export const CountryCardHeader = styled.div`
@@ -6,12 +7,22 @@ export const CountryCardHeader = styled.div`
   min-height: 2rem;
   width: 100%;
   text-align: center;
+
+  ${down('xl')} {
+    margin-left: ${(props) => props.theme.spacings.small};
+    display: flex;
+    align-items: center;
+  }
 `;
 
 export const CountryCardTitle = styled.p<{ fontSize: string }>`
   color: ${(props) => props.theme.colors.primary};
   font-size: ${({ fontSize }) => fontSize} !important;
   font-weight: 600;
+
+  ${down('xl')} {
+    margin-right: ${(props) => props.theme.spacings.small};
+  }
 `;
 
 export const CountryCardRegion = styled.p`
@@ -38,6 +49,12 @@ export const CountryCardFlagWrapper = styled.figure<{
     max-width: 100%;
     max-height: 100%;
   }
+
+  ${down('xl')} {
+    margin: 0;
+    height: auto;
+    width: 48px;
+  }
 `;
 
 export const CountryCardFlag = styled.img`
@@ -52,6 +69,10 @@ export const CountryCardBody = styled.div`
 export const CountryCardFooter = styled.div`
   text-align: center;
   width: 100%;
+
+  ${down('xl')} {
+    display: none;
+  }
 `;
 
 export const CountryCardFooterIcon = styled(BsPeopleFill)`
@@ -91,5 +112,15 @@ export const CountryCardWrapper = styled.div<{ selected: boolean }>`
     ${CountryCardRegion} {
       font-weight: 600;
     }
+  }
+
+  ${down('xl')} {
+    width: 100%;
+    padding: ${(props) => props.theme.spacings.xSmall};
+
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-start;
   }
 `;

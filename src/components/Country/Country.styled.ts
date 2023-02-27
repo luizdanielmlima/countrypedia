@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { down } from 'styled-breakpoints';
 
 export const CountryWrapper = styled.div`
   display: flex;
@@ -35,6 +36,10 @@ export const CountryHeaderDivider = styled.h4`
 
 export const CountryHeaderName = styled.h1`
   font-weight: 800;
+
+  ${down('xl')} {
+    font-size: ${(props) => props.theme.fontSizes.medium} !important;
+  }
 `;
 
 export const CountryHeaderRegion = styled.h4`
@@ -45,6 +50,11 @@ export const FlagMapWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: ${(props) => props.theme.spacings.medium};
+
+  ${down('xl')} {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
 `;
 
 export const CountryFlag = styled.img`
@@ -62,6 +72,11 @@ export const InfoItemWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: ${(props) => props.theme.spacings.medium};
+
+  ${down('xl')} {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
 `;
 
 export const InfoItemVert = styled.div`
@@ -75,11 +90,17 @@ export const InfoItemHoriz = styled.div`
   display: flex;
   align-items: center;
 `;
+
 export const InfoLabel = styled.p`
   font-size: ${(props) => props.theme.fontSizes.xSmall};
   font-weight: 300;
 `;
+
 export const InfoValue = styled.div`
   font-size: ${(props) => props.theme.fontSizes.medium};
   font-weight: 600;
+
+  ${down('xl')} {
+    font-size: ${(props) => props.theme.fontSizes.small} !important;
+  }
 `;

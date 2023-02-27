@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
+
 import { useDispatch } from 'react-redux';
+
 import useGetAllCountries from '../../api/useGetAllCountries';
 import { CountryType } from '../../models/Country';
 import { countriesActions } from '../../store/countries';
@@ -10,6 +12,7 @@ import {
   CountriesList,
   CountriesListHeader,
   CountriesWrapper,
+  LoadingWrapper,
 } from './Countries.styled';
 import Filters from './Filters';
 import Pagination from './Pagination.tsx/Pagination';
@@ -129,9 +132,9 @@ const Countries = () => {
   return (
     <CountriesWrapper>
       {countriesLoading && (
-        <>
+        <LoadingWrapper>
           <LoadingFeedback />
-        </>
+        </LoadingWrapper>
       )}
       {countriesError && <p>An error has occured.</p>}
       {!countriesLoading && countriesOnThePage && (
