@@ -35,7 +35,7 @@ export const AppWrapper = styled.div`
   }
 
   ${down('xl')} {
-    padding: ${(props) => props.theme.spacings.small};
+    padding: ${(props) => props.theme.spacings.medium};
     padding-top: 0;
   }
 `;

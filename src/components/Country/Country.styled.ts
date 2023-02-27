@@ -36,6 +36,10 @@ export const CountryHeaderDivider = styled.h4`
 
 export const CountryHeaderName = styled.h1`
   font-weight: 800;
+
+  ${down('xl')} {
+    font-size: ${(props) => props.theme.fontSizes.medium} !important;
+  }
 `;
 
 export const CountryHeaderRegion = styled.h4`
@@ -86,11 +90,17 @@ export const InfoItemHoriz = styled.div`
   display: flex;
   align-items: center;
 `;
+
 export const InfoLabel = styled.p`
   font-size: ${(props) => props.theme.fontSizes.xSmall};
   font-weight: 300;
 `;
+
 export const InfoValue = styled.div`
   font-size: ${(props) => props.theme.fontSizes.medium};
   font-weight: 600;
+
+  ${down('xl')} {
+    font-size: ${(props) => props.theme.fontSizes.small} !important;
+  }
 `;

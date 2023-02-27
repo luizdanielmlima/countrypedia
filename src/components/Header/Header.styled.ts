@@ -17,6 +17,7 @@ export const HeaderWrapper = styled.div`
 
   ${down('xl')} {
     flex-direction: column;
+    margin-bottom: ${(props) => props.theme.spacings.small};
 
     p span {
       display: none;
@@ -31,10 +32,12 @@ export const HeaderCredits = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+`;
 
-  ${down('xl')} {
-    flex-direction: column;
-  }
+export const HeaderDataFromWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 `;
 
 export const HeaderRightSide = styled.div`

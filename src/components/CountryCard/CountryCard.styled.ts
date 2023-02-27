@@ -10,6 +10,8 @@ export const CountryCardHeader = styled.div`
 
   ${down('xl')} {
     margin-left: ${(props) => props.theme.spacings.small};
+    display: flex;
+    align-items: center;
   }
 `;
 
@@ -17,6 +19,10 @@ export const CountryCardTitle = styled.p<{ fontSize: string }>`
   color: ${(props) => props.theme.colors.primary};
   font-size: ${({ fontSize }) => fontSize} !important;
   font-weight: 600;
+
+  ${down('xl')} {
+    margin-right: ${(props) => props.theme.spacings.small};
+  }
 `;
 
 export const CountryCardRegion = styled.p`
@@ -45,8 +51,9 @@ export const CountryCardFlagWrapper = styled.figure<{
   }
 
   ${down('xl')} {
-    height: auto;
     margin: 0;
+    height: auto;
+    width: 48px;
   }
 `;
 
@@ -108,6 +115,9 @@ export const CountryCardWrapper = styled.div<{ selected: boolean }>`
   }
 
   ${down('xl')} {
+    width: 100%;
+    padding: ${(props) => props.theme.spacings.xSmall};
+
     display: flex;
     flex-direction: row-reverse;
     align-items: center;

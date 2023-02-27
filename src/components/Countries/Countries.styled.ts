@@ -14,10 +14,12 @@ export const CountriesList = styled.div`
   grid-gap: ${(props) => props.theme.spacings.medium};
 
   ${down('xl')} {
-    max-height: 200px;
+    max-height: 240px;
+    margin-right: -12px; // align to right, scroll handle adds padding right
 
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: ${(props) => props.theme.spacings.xSmall};
   }
 `;
 

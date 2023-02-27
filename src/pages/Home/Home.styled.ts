@@ -9,5 +9,6 @@ export const HomeContent = styled.div`
   ${down('xl')} {
     display: flex;
     flex-direction: column;
+    justify-content: center;
   }
 `;

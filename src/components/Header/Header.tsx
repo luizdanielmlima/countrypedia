@@ -5,6 +5,7 @@ import { RootState } from '../../store';
 import ThemeSwitcher from '../ThemeSwitcher';
 import {
   HeaderCredits,
+  HeaderDataFromWrapper,
   HeaderLogoStyled,
   HeaderRightSide,
   HeaderWrapper,
@@ -34,23 +35,25 @@ const Header = () => {
           <p>
             &nbsp; <span>|&nbsp;</span>Data from &nbsp;{' '}
           </p>
-          <a
-            href="https://openweathermap.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="openweather"
-          >
-            Open Weather &nbsp;
-          </a>
-          <p>and &nbsp; </p>
-          <a
-            href="https://restcountries.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="restcountries"
-          >
-            Rest Countries
-          </a>
+          <HeaderDataFromWrapper>
+            <a
+              href="https://openweathermap.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="openweather"
+            >
+              Open Weather &nbsp;
+            </a>
+            <p>and &nbsp; </p>
+            <a
+              href="https://restcountries.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="restcountries"
+            >
+              Rest Countries
+            </a>
+          </HeaderDataFromWrapper>
         </HeaderCredits>
 
         <ThemeSwitcher />
