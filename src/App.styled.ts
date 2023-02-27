@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { down } from 'styled-breakpoints';
 
 export const AppWrapper = styled.div`
   min-height: 100vh;
@@ -31,5 +32,10 @@ export const AppWrapper = styled.div`
   }
   h4 {
     font-size: ${(props) => props.theme.fontSizes.small};
+  }
+
+  ${down('xl')} {
+    padding: ${(props) => props.theme.spacings.small};
+    padding-top: 0;
   }
 `;

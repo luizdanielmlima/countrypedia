@@ -31,7 +31,9 @@ const Header = () => {
           </a>
         </HeaderCredits>
         <HeaderCredits>
-          <p>&nbsp; | &nbsp;Data from &nbsp; </p>
+          <p>
+            &nbsp; <span>|&nbsp;</span>Data from &nbsp;{' '}
+          </p>
           <a
             href="https://openweathermap.org/"
             target="_blank"

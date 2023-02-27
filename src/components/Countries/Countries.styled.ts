@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { down } from 'styled-breakpoints';
 
 export const CountriesWrapper = styled.div`
   display: flex;
@@ -17,6 +18,11 @@ export const CountriesListHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  ${down('xl')} {
+    margin-bottom: ${(props) => props.theme.spacings.medium};
+    flex-direction: column;
+  }
 `;
 
 export const LoadingWrapper = styled.div`
