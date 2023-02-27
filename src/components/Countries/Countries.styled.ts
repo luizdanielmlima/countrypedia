@@ -12,6 +12,13 @@ export const CountriesList = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   grid-gap: ${(props) => props.theme.spacings.medium};
+
+  ${down('xl')} {
+    max-height: 200px;
+
+    display: flex;
+    flex-wrap: wrap;
+  }
 `;
 
 export const CountriesListHeader = styled.div`

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { down } from 'styled-breakpoints';
 
 export const CountryWrapper = styled.div`
   display: flex;
@@ -45,6 +46,11 @@ export const FlagMapWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: ${(props) => props.theme.spacings.medium};
+
+  ${down('xl')} {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
 `;
 
 export const CountryFlag = styled.img`
@@ -62,6 +68,11 @@ export const InfoItemWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: ${(props) => props.theme.spacings.medium};
+
+  ${down('xl')} {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
 `;
 
 export const InfoItemVert = styled.div`
