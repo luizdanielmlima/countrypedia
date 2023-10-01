@@ -22,6 +22,38 @@ const Countries = () => {
   const { countries, countriesLoading, countriesError } =
     useGetAllCountries();
 
+  // if (countries) {
+  //   console.log('countries: ', countries);
+  //   const capitals = countries
+  //     .filter(
+  //       (item) =>
+  //         item.capital?.length > 0 &&
+  //         item.capital[0] &&
+  //         item.capitalInfo?.latlng?.length > 0 &&
+  //         item.population > 100000,
+  //     )
+  //     .sort((a, b) => {
+  //       if (b.population === a.population) {
+  //         return a.name.common.localeCompare(b.name.common, 'en', {
+  //           sensitivity: 'base',
+  //         });
+  //       }
+  //       return b.population - a.population;
+  //     })
+  //     .map((ctry, index) => {
+  //       return {
+  //         id: index + 1,
+  //         name: ctry.capital?.length > 0 ? ctry.capital[0] : '-',
+  //         country: ctry.name?.common,
+  //         countryPopulation: ctry.population,
+  //         lat: ctry.capitalInfo.latlng[0],
+  //         lon: ctry.capitalInfo.latlng[1],
+  //         flag: ctry.flags.png,
+  //       };
+  //     });
+  //   console.log('capitals: ', JSON.stringify(capitals));
+  // }
+
   const [pageSize] = useState(30);
   const [pageNumber, setPageNumber] = useState(1);
   const [totalItens, setTotalItens] = useState(0);
