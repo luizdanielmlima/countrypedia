@@ -24,18 +24,14 @@ import CountryBorders from './CountryBorders';
 import CapitalForecast from '../CapitalForecast';
 
 const Country = () => {
-  const country = useSelector(
-    (state: RootState) => state.countries.country,
-  );
+  const country = useSelector((state: RootState) => state.countries.country);
 
   return (
     <CountryWrapper>
       {country && (
         <>
           <CountryHeader>
-            <CountryHeaderName>
-              {country.name.common || '-'}
-            </CountryHeaderName>
+            <CountryHeaderName>{country.name.common || '-'}</CountryHeaderName>
             <CountryHeaderDivider>|</CountryHeaderDivider>
             <CountryHeaderRegion>
               {country.region ? country.region.toUpperCase() : '-'}
@@ -54,9 +50,7 @@ const Country = () => {
               <InfoItems>
                 <InfoItemVert>
                   <InfoLabel>Population</InfoLabel>
-                  <InfoValue>
-                    {formatNumber(country.population)}
-                  </InfoValue>
+                  <InfoValue>{formatNumber(country.population)}</InfoValue>
                 </InfoItemVert>
                 <InfoItemVert>
                   <InfoLabel>Area</InfoLabel>
@@ -78,17 +72,14 @@ const Country = () => {
                 <InfoItemVert>
                   <InfoLabel>Capital</InfoLabel>
                   <InfoValue>
-                    {country.capital?.length > 0
-                      ? country.capital[0]
-                      : '-'}
+                    {country.capital?.length > 0 ? country.capital[0] : '-'}
                   </InfoValue>
                 </InfoItemVert>
                 <InfoItemVert>
                   <InfoValue>
-                    {country.capital?.length > 0 &&
-                      country.capital[0] && (
-                        <CapitalForecast country={country} />
-                      )}
+                    {country.capital?.length > 0 && country.capital[0] && (
+                      <CapitalForecast country={country} />
+                    )}
                   </InfoValue>
                 </InfoItemVert>
               </InfoItems>

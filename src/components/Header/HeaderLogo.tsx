@@ -26,7 +26,7 @@ const HeaderLogo: FC<{ color: string }> = ({ color }) => (
           transform="translate(1149 474)"
           fill="none"
           stroke={color}
-          stroke-width="2"
+          strokeWidth="2"
         />
       </g>
     </g>

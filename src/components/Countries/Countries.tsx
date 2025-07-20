@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import useGetAllCountries from '../../api/useGetAllCountries';
+import { useGetAllCountries } from '../../api/useGetAllCountries';
 import { CountryType } from '../../models/Country';
 import { countriesActions } from '../../store/countries';
 import { AnimatedEntrance } from '../../styles/Animations.styled';
@@ -19,8 +19,7 @@ import Pagination from './Pagination.tsx/Pagination';
 
 const Countries = () => {
   const dispatch = useDispatch();
-  const { countries, countriesLoading, countriesError } =
-    useGetAllCountries();
+  const { countries, countriesLoading, countriesError } = useGetAllCountries();
 
   // if (countries) {
   //   console.log('countries: ', countries);
@@ -58,8 +57,7 @@ const Countries = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [totalItens, setTotalItens] = useState(0);
 
-  const [selectedOrderBy, setSelectedOrderBy] =
-    useState('population');
+  const [selectedOrderBy, setSelectedOrderBy] = useState('population');
   const [selectedRegion, setSelectedRegion] = useState('all');
 
   useEffect(() => {
@@ -71,9 +69,7 @@ const Countries = () => {
   // NO COUNTRIES in Antartica ;)
   const fixCountries = useMemo(() => {
     if (countries) {
-      return [...countries].filter(
-        (country) => country.region !== 'Antarctic',
-      );
+      return [...countries].filter((country) => country.region !== 'Antarctic');
     }
     return [];
   }, [countries]);
@@ -118,30 +114,27 @@ const Countries = () => {
       });
       if (selectedRegion !== 'all') {
         filteredData = filteredData.filter(
-          (country) =>
-            country.region && country.region === selectedRegion,
+          (country) => country.region && country.region === selectedRegion,
         );
       }
       if (selectedOrderBy) {
-        filteredData = filteredData.sort(
-          (a: CountryType, b: CountryType) => {
-            if (
-              a[selectedOrderBy as keyof CountryType] <
-              b[selectedOrderBy as keyof CountryType]
-            ) {
-              return selectedOrderBy !== 'commonName' ? 1 : -1;
-            }
+        filteredData = filteredData.sort((a: CountryType, b: CountryType) => {
+          if (
+            a[selectedOrderBy as keyof CountryType] <
+            b[selectedOrderBy as keyof CountryType]
+          ) {
+            return selectedOrderBy !== 'commonName' ? 1 : -1;
+          }
 
-            if (
-              a[selectedOrderBy as keyof CountryType] >
-              b[selectedOrderBy as keyof CountryType]
-            ) {
-              return selectedOrderBy !== 'commonName' ? -1 : 1;
-            }
+          if (
+            a[selectedOrderBy as keyof CountryType] >
+            b[selectedOrderBy as keyof CountryType]
+          ) {
+            return selectedOrderBy !== 'commonName' ? -1 : 1;
+          }
 
-            return 0;
-          },
-        );
+          return 0;
+        });
       }
       setPageNumber(1);
       setTotalItens(filteredData.length);
@@ -194,10 +187,7 @@ const Countries = () => {
                   delay={index / 10}
                   key={`${index}_${country.name}_${country.capital}`}
                 >
-                  <Country
-                    country={country}
-                    loading={countriesLoading}
-                  />
+                  <Country country={country} loading={countriesLoading} />
                 </AnimatedEntrance>
               );
             })}
