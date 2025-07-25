@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -17,10 +17,7 @@ import {
 import { countriesActions } from '../../store/countries';
 import { RootState } from '../../store';
 
-const CountryCard: FC<{ loading: boolean; country: CountryType }> = ({
-  loading,
-  country,
-}) => {
+const CountryCard: FC<{ country: CountryType }> = ({ country }) => {
   const dispatch = useDispatch();
   const currentCountry = useSelector(
     (state: RootState) => state.countries.country,
@@ -56,8 +53,7 @@ const CountryCard: FC<{ loading: boolean; country: CountryType }> = ({
       onClick={handleClickCountry}
       selected={isSelected}
     >
-      {!country && loading && <p>Loading...</p>}
-      {country && !loading && (
+      {country && (
         <>
           <CountryCardHeader>
             <CountryCardTitle fontSize={getFontSize}>
@@ -88,4 +84,4 @@ const CountryCard: FC<{ loading: boolean; country: CountryType }> = ({
   );
 };
 
-export default CountryCard;
+export default memo(CountryCard);

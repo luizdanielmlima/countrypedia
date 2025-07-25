@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { formatNumber } from '../../utils/formatNumber';
@@ -23,7 +23,7 @@ import Languages from './Languages';
 import CountryBorders from './CountryBorders';
 import CapitalForecast from '../CapitalForecast';
 
-const Country = () => {
+let Country = () => {
   const country = useSelector((state: RootState) => state.countries.country);
 
   return (
@@ -120,4 +120,4 @@ const Country = () => {
   );
 };
 
-export default Country;
+export default memo(Country);

@@ -6,7 +6,6 @@ import { useGetAllCountries } from '../../api/useGetAllCountries';
 import { CountryType } from '../../models/Country';
 import { countriesActions } from '../../store/countries';
 import { AnimatedEntrance } from '../../styles/Animations.styled';
-import Country from '../CountryCard';
 import LoadingFeedback from '../LoadingFeedback/LoadingFeedback';
 import {
   CountriesList,
@@ -16,6 +15,7 @@ import {
 } from './Countries.styled';
 import Filters from './Filters';
 import Pagination from './Pagination.tsx/Pagination';
+import CountryCard from '../CountryCard';
 
 const Countries = () => {
   const dispatch = useDispatch();
@@ -187,7 +187,7 @@ const Countries = () => {
                   delay={index / 10}
                   key={`${index}_${country.name}_${country.capital}`}
                 >
-                  <Country country={country} loading={countriesLoading} />
+                  <CountryCard country={country} />
                 </AnimatedEntrance>
               );
             })}
