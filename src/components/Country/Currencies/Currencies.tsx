@@ -15,7 +15,7 @@ export const CurrencyItem = styled.div`
   justify-content: flex-start;
 
   p {
-    font-size: ${(props) => props.theme.fontSizes.medium};
+    font-size: ${(props) => props.theme.fontSizes.small};
   }
 
   p:not(:first-child) {
