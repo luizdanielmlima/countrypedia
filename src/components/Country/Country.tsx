@@ -74,7 +74,7 @@ let Country = () => {
                   <InfoLabel>Capital</InfoLabel>
                   <InfoValue>
                     {country.capitals?.length > 0
-                      ? country.capitals[0].coordinates.lat
+                      ? country.capitals[0].name
                       : '-'}
                   </InfoValue>
                 </InfoItemVert>

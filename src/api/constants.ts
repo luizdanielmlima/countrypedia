@@ -5,10 +5,4 @@ export const restCountriesAPIUrl = 'https://api.restcountries.com/countries/v5';
 
 // Available fields: https://www.npmjs.com/package/@yusifaliyevpro/countries#available-fields
 
-export const REGIONS = {
-  AFRICA: 'Africa',
-  AMERICAS: 'Americas',
-  ASIA: 'Asia',
-  EUROPE: 'Europe',
-  OCEANIA: 'Oceania',
-};
+export const REGIONS = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];

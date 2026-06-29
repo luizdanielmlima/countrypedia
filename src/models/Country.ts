@@ -16,6 +16,7 @@ export interface Capital {
     lat: number;
     lng: number;
   };
+  name: string;
 }
 
 export interface Language {
