@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "CountryInfopedia 1.0",
+  "name": "countryInfopedia",
   "icons": [
     {
       "src": "favicon.ico",
