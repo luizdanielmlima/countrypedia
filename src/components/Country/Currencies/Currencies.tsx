@@ -26,13 +26,10 @@ export const CurrencyItem = styled.div`
 const Currencies: FC<{ currencies: Record<string, Currency> }> = ({
   currencies,
 }) => {
-  const currenciesArr = useMemo(() => {
-    if (currencies) {
-      const currencArr = Object.entries(currencies);
-      return currencArr.map((cur) => cur[1]);
-    }
-    return [];
-  }, [currencies]);
+  const currenciesArr = useMemo(
+    () => (currencies ? Object.values(currencies) : []),
+    [currencies],
+  );
 
   return (
     <CurrenciesWrapper>

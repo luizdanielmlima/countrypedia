@@ -25,31 +25,32 @@ const CountryCard: FC<{ country: CountryType }> = ({ country }) => {
 
   const isSelected = useMemo(() => {
     if (currentCountry) {
-      return currentCountry.cca2 === country.cca2;
+      return currentCountry.codes.alpha_2 === country.codes.alpha_2;
     }
     return false;
-  }, [country.cca2, currentCountry]);
+  }, [country.codes.alpha_2, currentCountry]);
 
   const handleClickCountry = () => {
     dispatch(countriesActions.setCountry(country));
   };
 
   const getFontSize = useMemo(() => {
-    if (country.name.common.length > 24) {
+    const nameLength = country.names.common.length;
+    if (nameLength > 24) {
       return '0.65rem';
     }
-    if (country.name.common.length > 20) {
+    if (nameLength > 20) {
       return '0.7rem';
     }
-    if (country.name.common.length > 14) {
+    if (nameLength > 14) {
       return '0.75rem';
     }
     return '1rem';
-  }, [country.name.common.length]);
+  }, [country.names.common.length]);
 
   return (
     <CountryCardWrapper
-      key={`${country.name.common}_${country.capital}`}
+      key={country.uuid}
       onClick={handleClickCountry}
       selected={isSelected}
     >
@@ -57,7 +58,7 @@ const CountryCard: FC<{ country: CountryType }> = ({ country }) => {
         <>
           <CountryCardHeader>
             <CountryCardTitle fontSize={getFontSize}>
-              {country.name.common.toUpperCase()}
+              {country.names.common.toUpperCase()}
             </CountryCardTitle>
             {country.region[0] && (
               <CountryCardRegion>
@@ -69,8 +70,8 @@ const CountryCard: FC<{ country: CountryType }> = ({ country }) => {
             <CountryCardFlag
               loading="lazy"
               width={120}
-              src={country.flags.png}
-              alt={`${country.name.common} flag`}
+              src={country.flag.url_png ?? ''}
+              alt={`${country.names.common ?? 'Unknown'} flag`}
             />
           </CountryCardFlagWrapper>
 

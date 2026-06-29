@@ -1,5 +1,6 @@
-import React, { FC, useMemo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { Language } from '../../../models/Country';
 
 export const LanguagesWrapper = styled.div`
   width: 100%;
@@ -23,31 +24,19 @@ export const LanguageItem = styled.div`
   }
 `;
 
-const Languages: FC<{ languages: Record<string, string> }> = ({
-  languages,
-}) => {
-  const languagesArr = useMemo(() => {
-    if (languages) {
-      const langsArr = Object.entries(languages);
-      return langsArr.map((lang) => lang[1]);
-    }
-    return [];
-  }, [languages]);
-
-  return (
-    <LanguagesWrapper>
-      {languagesArr &&
-        languagesArr.length > 0 &&
-        languagesArr.map((lang, index) => {
-          return (
-            <LanguageItem key={`${index}_${lang}`}>
-              <p>{lang}</p>
-              <p>{index !== languagesArr.length - 1 && ` | `}</p>
-            </LanguageItem>
-          );
-        })}
-    </LanguagesWrapper>
-  );
-};
+const Languages = ({ languages }: { languages: Language[] }) => (
+  <LanguagesWrapper>
+    {languages &&
+      languages.length > 0 &&
+      languages.map((lang, index) => {
+        return (
+          <LanguageItem key={`${index}_${lang}`}>
+            <p>{lang.native_name}</p>
+            <p>{index !== languages.length - 1 && ` | `}</p>
+          </LanguageItem>
+        );
+      })}
+  </LanguagesWrapper>
+);
 
 export default Languages;

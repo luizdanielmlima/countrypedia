@@ -15,12 +15,9 @@ interface CountryInfo {
   name: string;
 }
 
-const CountryMap: FC<{ countryData: CountryType }> = ({
-  countryData,
-}) => {
-  const theme = useSelector(
-    (state: RootState) => state.countries.theme,
-  );
+const CountryMap: FC<{ countryData: CountryType }> = ({ countryData }) => {
+  console.log('countryData: ', countryData);
+  const theme = useSelector((state: RootState) => state.countries.theme);
 
   const countries = useSelector(
     (state: RootState) => state.countries.countries,
@@ -32,9 +29,12 @@ const CountryMap: FC<{ countryData: CountryType }> = ({
       if (!countries || countries?.length === 0) return null;
 
       const foundCountry = countries?.find(
-        (country) => country.cca2 === countryCode,
+        (country) =>
+          country.codes.alpha_2 === countryCode ||
+          country.codes.alpha_3 === countryCode,
       );
 
+      console.log('foundCountry: ', foundCountry);
       if (foundCountry) {
         dispatch(countriesActions.setCountry(foundCountry));
       }
@@ -56,9 +56,7 @@ const CountryMap: FC<{ countryData: CountryType }> = ({
     map.background.fillOpacity = 1;
 
     // Create map polygon series
-    let polygonSeries = map.series.push(
-      new am4maps.MapPolygonSeries(),
-    );
+    let polygonSeries = map.series.push(new am4maps.MapPolygonSeries());
 
     // Make map load polygon (like country names) data from GeoJSON
     polygonSeries.useGeodata = true;
@@ -67,9 +65,7 @@ const CountryMap: FC<{ countryData: CountryType }> = ({
     let polygonTemplate = polygonSeries.mapPolygons.template;
     polygonTemplate.tooltipText = '{name}';
     polygonTemplate.fill = am4core.color(
-      theme.colors.secondaryVariant
-        ? theme.colors.secondaryVariant
-        : '#fcc',
+      theme.colors.secondaryVariant ? theme.colors.secondaryVariant : '#fcc',
     );
     polygonTemplate.stroke = am4core.color(
       theme.colors.background ? theme.colors.background : '#ccc',
@@ -83,7 +79,7 @@ const CountryMap: FC<{ countryData: CountryType }> = ({
 
     polygonSeries.data = [
       {
-        id: countryData.cca2,
+        id: countryData.codes.alpha_2,
         name: countryData.commonName || '-',
         fill: am4core.color(
           theme.colors.secondary ? theme.colors.secondary : '#eaa',
@@ -94,17 +90,17 @@ const CountryMap: FC<{ countryData: CountryType }> = ({
     polygonTemplate.propertyFields.fill = 'fill';
 
     // Center on Country
-    map.homeZoomLevel = getMapZoomLevel(countryData.area) || 7;
+    map.homeZoomLevel = getMapZoomLevel(countryData.area.kilometers) || 7;
     map.homeGeoPoint = {
-      latitude: countryData.latlng[0],
-      longitude: countryData.latlng[1],
+      latitude: countryData.coordinates.lat,
+      longitude: countryData.coordinates.lng,
     };
 
     // Click on country
     polygonTemplate.events.on('hit', function (ev) {
       // get object info
-      const countryInfo = ev.target.dataItem
-        .dataContext as CountryInfo;
+      const countryInfo = ev.target.dataItem.dataContext as CountryInfo;
+      console.log('countryInfo: ', countryInfo);
       handleSelectedCountry(countryInfo.id);
     });
 
@@ -122,10 +118,7 @@ const CountryMap: FC<{ countryData: CountryType }> = ({
 
   return (
     <>
-      <div
-        id="chartdiv"
-        style={{ width: '100%', height: '100%' }}
-      ></div>
+      <div id="chartdiv" style={{ width: '100%', height: '100%' }}></div>
     </>
   );
 };

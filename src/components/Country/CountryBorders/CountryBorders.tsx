@@ -45,9 +45,9 @@ const CountryBorders: FC<{ borders: string[] }> = ({ borders }) => {
 
       const foundCountry = countries?.find(
         (country) =>
-          country.cioc === countryCode ||
-          country.cca2 === countryCode ||
-          country.cca3 === countryCode,
+          country.codes.alpha_2 === countryCode ||
+          country.codes.alpha_3 === countryCode ||
+          country.codes.cioc === countryCode,
       );
 
       if (foundCountry) {

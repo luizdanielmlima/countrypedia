@@ -3,39 +3,72 @@ export interface Currency {
   symbol: string;
 }
 
+export interface Capital {
+  attributes: {
+    administrative: boolean;
+    constitutional: boolean;
+    executive: boolean;
+    judicial: boolean;
+    legislative: boolean;
+    primary: boolean;
+  };
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
+}
+
+export interface Language {
+  bcp47: string;
+  iso639_1: string;
+  iso639_2b: string;
+  iso639_2t: string;
+  iso639_3: string;
+  name: string;
+  native_name: string;
+}
+
 export interface CountryType {
-  altSpellings: string[];
-  area: number;
+  area: {
+    kilometers: number;
+    miles: number;
+  };
   borders: string[];
-  capital: string[];
-  capitalInfo: { latlng: number[] };
-  cca2: string;
-  cca3: string;
-  ccn3: string;
-  cioc: string;
+  capitals: Capital[];
+  codes: {
+    alpha_2: string;
+    alpha_3: string;
+    ccn3: string;
+    cioc: string;
+    fifa: string;
+    fips: string;
+    gec: string;
+  };
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
   coatOfArms: Record<string, string>;
   commonName: string; // added this to make sorting easier
   continents: string[];
   currencies: Record<string, Currency>;
-  flags: { alt: string; png: string; svg: string };
+  flag: { unicode: string; url_png: string; url_svg: string };
   independent: boolean;
-  languages: Record<string, string>;
-  latlng: number[];
-  maps: {
-    googleMaps: string;
-    openStreetMaps: string;
+  languages: Language[];
+  links: {
+    google_maps: string;
+    official: string;
+    open_street_maps: string;
+    wikipedia: string;
   };
-  name: {
+  names: {
     common: string;
-    nativeName: any;
     official: string;
   };
   population: number;
   region: string;
-  startOfWeek: string;
-  status: string;
   subregion: string;
   timezones: string[];
-  tld: any;
-  unMember: boolean;
+  tlds: string[];
+  uuid: string;
 }

@@ -1,26 +1,26 @@
-import React, { useMemo, FC } from "react";
+import React, { useMemo, FC } from 'react';
 
-import useGetForecast from "../../api/useGetForecast";
-import { CountryType } from "../../models/Country";
-import { Weather } from "../../models/ForeCast";
-import { InfoItemHoriz, InfoLabel } from "../Country/Country.styled";
-import LoadingFeedback from "../LoadingFeedback/LoadingFeedback";
-import LocalTime from "../LocalTime";
-import WeatherIcon from "../WeatherIcon";
+import useGetForecast from '../../api/useGetForecast';
+import { CountryType } from '../../models/Country';
+import { Weather } from '../../models/ForeCast';
+import { InfoItemHoriz, InfoLabel } from '../Country/Country.styled';
+import LoadingFeedback from '../LoadingFeedback/LoadingFeedback';
+import LocalTime from '../LocalTime';
+import WeatherIcon from '../WeatherIcon';
 import {
   ForecastMain,
   ForecastMainText,
   ForecastTemperature,
   ForecastTemperatures,
   ForecastWrapper,
-} from "./CapitalForecast.styled";
+} from './CapitalForecast.styled';
 
 const CapitalForecast: FC<{ country: CountryType }> = ({ country }) => {
   const { currentForecast, currentForecastLoading, currentForecastError } =
     useGetForecast(
-      country.capitalInfo.latlng[0],
-      country.capitalInfo.latlng[1],
-      "metric"
+      country.capitals[0].coordinates.lat,
+      country.capitals[0].coordinates.lng,
+      'metric',
     );
 
   const weatherCondition = useMemo(() => {
@@ -35,7 +35,7 @@ const CapitalForecast: FC<{ country: CountryType }> = ({ country }) => {
       };
       return condition;
     }
-    return { main: "unknown", description: "unknown" };
+    return { main: 'unknown', description: 'unknown' };
   }, [currentForecast]);
 
   return (

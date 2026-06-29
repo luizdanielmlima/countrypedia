@@ -25,13 +25,14 @@ import CapitalForecast from '../CapitalForecast';
 
 let Country = () => {
   const country = useSelector((state: RootState) => state.countries.country);
+  console.log('country: ', country);
 
   return (
     <CountryWrapper>
       {country && (
         <>
           <CountryHeader>
-            <CountryHeaderName>{country.name.common || '-'}</CountryHeaderName>
+            <CountryHeaderName>{country.names.common || '-'}</CountryHeaderName>
             <CountryHeaderDivider>|</CountryHeaderDivider>
             <CountryHeaderRegion>
               {country.region ? country.region.toUpperCase() : '-'}
@@ -41,8 +42,8 @@ let Country = () => {
             <FlagMapWrapper>
               <CountryFlag
                 loading="lazy"
-                src={country.flags.png}
-                alt={`${country.name.common} flag`}
+                src={country.flag.url_png}
+                alt={`${country.names.common} flag`}
               />
               <CountryMap countryData={country} />
             </FlagMapWrapper>
@@ -55,7 +56,7 @@ let Country = () => {
                 <InfoItemVert>
                   <InfoLabel>Area</InfoLabel>
                   <InfoValue>
-                    {formatNumber(country.area)}
+                    {formatNumber(country.area.kilometers || 0)}
                     <span> km&sup2;</span>
                   </InfoValue>
                 </InfoItemVert>
@@ -72,14 +73,17 @@ let Country = () => {
                 <InfoItemVert>
                   <InfoLabel>Capital</InfoLabel>
                   <InfoValue>
-                    {country.capital?.length > 0 ? country.capital[0] : '-'}
+                    {country.capitals?.length > 0
+                      ? country.capitals[0].coordinates.lat
+                      : '-'}
                   </InfoValue>
                 </InfoItemVert>
                 <InfoItemVert>
                   <InfoValue>
-                    {country.capital?.length > 0 && country.capital[0] && (
-                      <CapitalForecast country={country} />
-                    )}
+                    {country.capitals?.length > 0 &&
+                      country.capitals[0].coordinates.lat && (
+                        <CapitalForecast country={country} />
+                      )}
                   </InfoValue>
                 </InfoItemVert>
               </InfoItems>
@@ -88,10 +92,11 @@ let Country = () => {
               <InfoItemVert>
                 <InfoLabel>Language</InfoLabel>
                 <InfoValue>
-                  {country.languages && (
+                  {country.languages ? (
                     <Languages languages={country.languages} />
+                  ) : (
+                    '-'
                   )}
-                  {!country.languages && '-'}
                 </InfoValue>
               </InfoItemVert>
               <InfoItemVert>
