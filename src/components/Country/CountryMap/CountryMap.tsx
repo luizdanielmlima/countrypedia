@@ -16,7 +16,6 @@ interface CountryInfo {
 }
 
 const CountryMap: FC<{ countryData: CountryType }> = ({ countryData }) => {
-  console.log('countryData: ', countryData);
   const theme = useSelector((state: RootState) => state.countries.theme);
 
   const countries = useSelector(
@@ -34,7 +33,6 @@ const CountryMap: FC<{ countryData: CountryType }> = ({ countryData }) => {
           country.codes.alpha_3 === countryCode,
       );
 
-      console.log('foundCountry: ', foundCountry);
       if (foundCountry) {
         dispatch(countriesActions.setCountry(foundCountry));
       }
@@ -100,7 +98,6 @@ const CountryMap: FC<{ countryData: CountryType }> = ({ countryData }) => {
     polygonTemplate.events.on('hit', function (ev) {
       // get object info
       const countryInfo = ev.target.dataItem.dataContext as CountryInfo;
-      console.log('countryInfo: ', countryInfo);
       handleSelectedCountry(countryInfo.id);
     });
 

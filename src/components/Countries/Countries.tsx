@@ -20,7 +20,6 @@ import CountryCard from '../CountryCard';
 const Countries = () => {
   const dispatch = useDispatch();
   const { countries, countriesLoading, countriesError } = useGetAllCountries();
-  console.log('countries: ', countries);
 
   const [pageSize] = useState(30);
   const [pageNumber, setPageNumber] = useState(1);
