@@ -14,17 +14,13 @@ const Filters: FC<FilterProps> = ({
   onRegionSelected,
   onOrderBySelected,
 }) => {
-  const handleOrderByChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
+  const handleOrderByChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
     const selection = event.target.value;
     onOrderBySelected(selection);
   };
 
-  const handleRegionChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
+  const handleRegionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selection = event.target.value;
     onRegionSelected(selection);
   };
@@ -40,7 +36,7 @@ const Filters: FC<FilterProps> = ({
         >
           <option value="commonName">Alphabetically</option>
           <option value="population">Population</option>
-          <option value="area">Area</option>
+          <option value="areaKm">Area</option>
         </select>
       </FilterWrapper>
       <FilterWrapper>

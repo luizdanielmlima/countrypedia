@@ -78,6 +78,7 @@ const Countries = () => {
         return {
           ...country,
           commonName: country.names.common,
+          areaKm: country.area.kilometers,
         };
       });
       if (selectedRegion !== 'all') {
