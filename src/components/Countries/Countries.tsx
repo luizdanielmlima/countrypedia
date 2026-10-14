@@ -23,7 +23,6 @@ const Countries = () => {
 
   const [pageSize] = useState(30);
   const [pageNumber, setPageNumber] = useState(1);
-  const [totalItens, setTotalItens] = useState(0);
 
   const [selectedOrderBy, setSelectedOrderBy] = useState('population');
   const [selectedRegion, setSelectedRegion] = useState('all');
@@ -42,15 +41,47 @@ const Countries = () => {
     return [];
   }, [countries]);
 
-  // == PAGINATION (Start)
-  useEffect(() => {
-    setPageNumber(1);
-  }, [totalItens]);
+  const filteredCountries = useMemo(() => {
+    if (fixCountries.length === 0) {
+      return [];
+    }
+    let filteredData = fixCountries.map((country) => {
+      return {
+        ...country,
+        commonName: country.names.common,
+        areaKm: country.area.kilometers,
+      };
+    });
+    if (selectedRegion !== 'all') {
+      filteredData = filteredData.filter(
+        (country) => country.region && country.region === selectedRegion,
+      );
+    }
+    if (selectedOrderBy) {
+      filteredData = filteredData.sort((a: CountryType, b: CountryType) => {
+        if (
+          a[selectedOrderBy as keyof CountryType] <
+          b[selectedOrderBy as keyof CountryType]
+        ) {
+          return selectedOrderBy !== 'commonName' ? 1 : -1;
+        }
 
-  const numOfPages = useMemo(() => {
-    const pages = Math.ceil(totalItens / pageSize);
-    return pages;
-  }, [pageSize, totalItens]);
+        if (
+          a[selectedOrderBy as keyof CountryType] >
+          b[selectedOrderBy as keyof CountryType]
+        ) {
+          return selectedOrderBy !== 'commonName' ? -1 : 1;
+        }
+
+        return 0;
+      });
+    }
+    return filteredData;
+  }, [fixCountries, selectedOrderBy, selectedRegion]);
+
+  // == PAGINATION (Start)
+  const totalItens = filteredCountries.length;
+  const numOfPages = Math.ceil(totalItens / pageSize);
 
   const onPaginationAction = (action: string) => {
     if (action === 'first') {
@@ -72,56 +103,31 @@ const Countries = () => {
   };
   // == PAGINATION (End)
 
-  const filteredCountries = useMemo(() => {
-    if (fixCountries && fixCountries.length > 0) {
-      let filteredData = [...fixCountries].map((country) => {
-        return {
-          ...country,
-          commonName: country.names.common,
-          areaKm: country.area.kilometers,
-        };
-      });
-      if (selectedRegion !== 'all') {
-        filteredData = filteredData.filter(
-          (country) => country.region && country.region === selectedRegion,
-        );
-      }
-      if (selectedOrderBy) {
-        filteredData = filteredData.sort((a: CountryType, b: CountryType) => {
-          if (
-            a[selectedOrderBy as keyof CountryType] <
-            b[selectedOrderBy as keyof CountryType]
-          ) {
-            return selectedOrderBy !== 'commonName' ? 1 : -1;
-          }
-
-          if (
-            a[selectedOrderBy as keyof CountryType] >
-            b[selectedOrderBy as keyof CountryType]
-          ) {
-            return selectedOrderBy !== 'commonName' ? -1 : 1;
-          }
-
-          return 0;
-        });
-      }
-      setPageNumber(1);
-      setTotalItens(filteredData.length);
-      return filteredData;
-    }
-  }, [fixCountries, selectedOrderBy, selectedRegion]);
-
-  const countriesOnThePage = useMemo(() => {
-    if (filteredCountries && filteredCountries.length > 0) {
-      const data = filteredCountries.slice(
+  const countriesOnThePage = useMemo(
+    () =>
+      filteredCountries.slice(
         (pageNumber - 1) * pageSize,
         pageNumber * pageSize,
-      );
-      dispatch(countriesActions.setCountry(data[0]));
-      return data;
+      ),
+    [filteredCountries, pageNumber, pageSize],
+  );
+
+  // select the first country whenever the visible page changes
+  useEffect(() => {
+    if (countriesOnThePage.length > 0) {
+      dispatch(countriesActions.setCountry(countriesOnThePage[0]));
     }
-    return [];
-  }, [dispatch, filteredCountries, pageNumber, pageSize]);
+  }, [countriesOnThePage, dispatch]);
+
+  const handleRegionSelected = (region: string) => {
+    setSelectedRegion(region);
+    setPageNumber(1);
+  };
+
+  const handleOrderBySelected = (orderBy: string) => {
+    setSelectedOrderBy(orderBy);
+    setPageNumber(1);
+  };
 
   return (
     <CountriesWrapper>
@@ -137,8 +143,8 @@ const Countries = () => {
             <Filters
               region={selectedRegion}
               orderBy={selectedOrderBy}
-              onRegionSelected={(sel) => setSelectedRegion(sel)}
-              onOrderBySelected={(sel) => setSelectedOrderBy(sel)}
+              onRegionSelected={handleRegionSelected}
+              onOrderBySelected={handleOrderBySelected}
             />
             <Pagination
               pageNumber={pageNumber}

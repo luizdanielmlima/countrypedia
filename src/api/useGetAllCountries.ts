@@ -15,10 +15,17 @@ export const useGetAllCountries = () => {
       };
 
       const [africa, americas, asia, europe, oceania] = await Promise.all(
-        REGIONS.map((region) => {
-          return fetch(`${restCountriesAPIUrl}/region/${region}${params}`, {
-            headers,
-          });
+        REGIONS.map(async (region) => {
+          const response = await fetch(
+            `${restCountriesAPIUrl}/region/${region}${params}`,
+            { headers },
+          );
+          if (!response.ok) {
+            throw new Error(
+              `Countries request for ${region} failed (${response.status})`,
+            );
+          }
+          return response;
         }),
       );
 
