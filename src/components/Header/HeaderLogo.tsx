@@ -1,7 +1,11 @@
 import { FC } from 'react';
 
-const HeaderLogo: FC<{ color: string }> = ({ color }) => (
+const HeaderLogo: FC<{ color: string; className?: string }> = ({
+  color,
+  className,
+}) => (
   <svg
+    className={className}
     xmlns="http://www.w3.org/2000/svg"
     width="457.543"
     height="61.975"

@@ -1,21 +1,28 @@
 import styled from 'styled-components';
 import { down } from 'styled-breakpoints';
 
-export const CountryWrapper = styled.div`
-  display: flex;
+// Desktop: fills the grid cell next to the list and scrolls inside it.
+// `$flat` (used inside the country modal) drops the card styling and the inner
+// scrolling: the modal body does the scrolling.
+export const CountryWrapper = styled.div<{ $flat?: boolean }>`
+  min-height: 0;
+  display: ${({ $flat }) => ($flat ? 'block' : 'flex')};
   flex-direction: column;
 `;
 
-export const ContryContentWrapper = styled.div`
-  height: calc(100vh - 220px);
-  max-height: calc(100vh - 220px);
-  overflow-y: auto;
-  padding: ${(props) =>
-    `${props.theme.spacings.large} ${props.theme.spacings.large}`};
-  background-color: ${(props) => props.theme.colors.surface};
-  border: 1px solid ${(props) => props.theme.colors.surface};
-  border-radius: ${(props) => props.theme.borderRadius.small};
-  box-shadow: ${(props) => props.theme.shadows.large};
+export const ContryContentWrapper = styled.div<{ $flat?: boolean }>`
+  flex: 1;
+  min-height: 0;
+  overflow-y: ${({ $flat }) => ($flat ? 'visible' : 'auto')};
+  padding: ${({ $flat, theme }) =>
+    $flat ? '0' : `${theme.spacings.large} ${theme.spacings.large}`};
+  background-color: ${({ $flat, theme }) =>
+    $flat ? 'transparent' : theme.colors.surface};
+  border: ${({ $flat, theme }) =>
+    $flat ? 'none' : `1px solid ${theme.colors.surface}`};
+  border-radius: ${({ $flat, theme }) =>
+    $flat ? '0' : theme.borderRadius.small};
+  box-shadow: ${({ $flat, theme }) => ($flat ? 'none' : theme.shadows.large)};
 
   display: flex;
   flex-direction: column;

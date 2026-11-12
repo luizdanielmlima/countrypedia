@@ -2,6 +2,7 @@ import React, { FC, memo, useMemo } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useIsMobile } from '../../hooks/useIsMobile';
 import { CountryType } from '../../models/Country';
 import { formatNumber } from '../../utils/formatNumber';
 import {
@@ -30,8 +31,19 @@ const CountryCard: FC<{ country: CountryType }> = ({ country }) => {
     return false;
   }, [country.codes.alpha_2, currentCountry]);
 
+  const isMobile = useIsMobile();
+
   const handleClickCountry = () => {
     dispatch(countriesActions.setCountry(country));
+    // on desktop the country panel is always visible; on mobile it lives in a modal
+    if (isMobile) dispatch(countriesActions.openModal());
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleClickCountry();
+    }
   };
 
   const getFontSize = useMemo(() => {
@@ -51,7 +63,10 @@ const CountryCard: FC<{ country: CountryType }> = ({ country }) => {
   return (
     <CountryCardWrapper
       key={country.uuid}
+      role="button"
+      tabIndex={0}
       onClick={handleClickCountry}
+      onKeyDown={handleKeyDown}
       selected={isSelected}
     >
       {country && (

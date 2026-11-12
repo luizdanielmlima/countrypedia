@@ -4,40 +4,35 @@ import { down } from 'styled-breakpoints';
 import HeaderLogo from './HeaderLogo';
 
 export const HeaderLogoStyled = styled(HeaderLogo)`
-  max-width: 200px;
+  ${down('xl')} {
+    grid-column: 1;
+    justify-self: start;
+    width: clamp(160px, 62vw, 280px);
+    max-width: 100%;
+    height: auto;
+  }
 `;
 
 export const HeaderWrapper = styled.div`
+  flex: none;
   padding-top: ${(props) => props.theme.spacings.large};
   padding-bottom: ${(props) => props.theme.spacings.medium};
 
   display: flex;
-  align-items: center;
+  /* stretch so the underline (on the right side) lines up with the bottom of the logo */
+  align-items: stretch;
   justify-content: flex-start;
 
   ${down('xl')} {
-    flex-direction: column;
     margin-bottom: ${(props) => props.theme.spacings.small};
+    padding-top: ${(props) => props.theme.spacings.medium};
+    padding-bottom: ${(props) => props.theme.spacings.small};
 
-    p span {
-      display: none;
-    }
-
-    svg {
-      width: 100%;
-    }
+    /* logo on the left, icons on the right */
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
   }
-`;
-export const HeaderCredits = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
-export const HeaderDataFromWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
 `;
 
 export const HeaderRightSide = styled.div`
@@ -51,40 +46,13 @@ export const HeaderRightSide = styled.div`
   align-items: flex-start;
   justify-content: flex-end;
 
-  p,
-  a {
-    margin-bottom: ${(props) => props.theme.spacings.xSmall};
-  }
-
-  svg {
-    margin-bottom: ${(props) => props.theme.spacings.xxSmall};
-  }
-
-  a,
-  a:visited {
-    font-size: ${(props) => props.theme.fontSizes.xSmall};
-    color: ${(props) => props.theme.colors.secondary} !important;
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  a:hover,
-  a:active {
-    color: ${(props) => props.theme.colors.secondaryVariant};
-  }
-
   ${down('xl')} {
+    grid-column: 2;
+    justify-self: end;
+    margin-left: 0;
+    padding-top: 0;
     border-bottom: none;
-    flex-direction: column;
+    flex-grow: 0;
     align-items: center;
-    justify-content: center;
-
-    div {
-      margin: 0;
-    }
-
-    svg {
-      margin-top: ${(props) => props.theme.spacings.xxSmall};
-    }
   }
 `;

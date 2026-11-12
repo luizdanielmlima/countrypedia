@@ -9,6 +9,7 @@ import {
 
 import {
   PageTotals,
+  PaginationButton,
   PaginationInfo,
   PaginationSeparator,
   PaginationValue,
@@ -34,24 +35,40 @@ const Pagination: FC<PaginationProps> = ({
         <p>Countries:&nbsp;</p>
         <p>{pageItens}</p>
       </PageTotals>
-      <BsChevronDoubleLeft
+      <PaginationButton
+        type="button"
+        aria-label="first page"
         onClick={() => handlePaginationAction('first')}
-      />
-      <BsChevronLeft
+      >
+        <BsChevronDoubleLeft />
+      </PaginationButton>
+      <PaginationButton
+        type="button"
+        aria-label="previous page"
         onClick={() => handlePaginationAction('previous')}
-      />
+      >
+        <BsChevronLeft />
+      </PaginationButton>
       <PaginationInfo>
         <PaginationSeparator>Page</PaginationSeparator>
         <PaginationValue>{pageNumber}</PaginationValue>
         <PaginationSeparator>of</PaginationSeparator>
         <PaginationValue>{numOfPages}</PaginationValue>
       </PaginationInfo>
-      <BsChevronRight
+      <PaginationButton
+        type="button"
+        aria-label="next page"
         onClick={() => handlePaginationAction('next')}
-      />
-      <BsChevronDoubleRight
+      >
+        <BsChevronRight />
+      </PaginationButton>
+      <PaginationButton
+        type="button"
+        aria-label="last page"
         onClick={() => handlePaginationAction('last')}
-      />
+      >
+        <BsChevronDoubleRight />
+      </PaginationButton>
     </PaginationWrapper>
   );
 };

@@ -23,11 +23,12 @@ import Languages from './Languages';
 import CountryBorders from './CountryBorders';
 import CapitalForecast from '../CapitalForecast';
 
-let Country = () => {
+/** `flat` drops the card styling and inner scrolling, for use inside the country modal. */
+let Country = ({ flat = false }: { flat?: boolean }) => {
   const country = useSelector((state: RootState) => state.countries.country);
 
   return (
-    <CountryWrapper>
+    <CountryWrapper $flat={flat}>
       {country && (
         <>
           <CountryHeader>
@@ -37,7 +38,7 @@ let Country = () => {
               {country.region ? country.region.toUpperCase() : '-'}
             </CountryHeaderRegion>
           </CountryHeader>
-          <ContryContentWrapper>
+          <ContryContentWrapper $flat={flat}>
             <FlagMapWrapper>
               <CountryFlag
                 loading="lazy"

@@ -6,11 +6,14 @@ export interface CountriesSliceState {
   country?: CountryType;
   countries?: CountryType[] | [];
   theme: ThemeModel;
+  /** Mobile only: whether the country modal is showing. */
+  modalOpen: boolean;
 }
 
 const initialCountriesState: CountriesSliceState = {
   countries: [],
   theme: lightTheme,
+  modalOpen: false,
 };
 
 const countriesSlice = createSlice({
@@ -25,6 +28,12 @@ const countriesSlice = createSlice({
     },
     setTheme(state, action: PayloadAction<ThemeModel>) {
       state.theme = action.payload;
+    },
+    openModal(state) {
+      state.modalOpen = true;
+    },
+    closeModal(state) {
+      state.modalOpen = false;
     },
   },
 });

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 
@@ -26,6 +26,8 @@ const Countries = () => {
 
   const [selectedOrderBy, setSelectedOrderBy] = useState('population');
   const [selectedRegion, setSelectedRegion] = useState('all');
+
+  const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (countries && countries.length > 0) {
@@ -119,6 +121,11 @@ const Countries = () => {
     }
   }, [countriesOnThePage, dispatch]);
 
+  // new page (or filter/sort) -> scroll the list back to the top
+  useEffect(() => {
+    if (listRef.current) listRef.current.scrollTop = 0;
+  }, [countriesOnThePage]);
+
   const handleRegionSelected = (region: string) => {
     setSelectedRegion(region);
     setPageNumber(1);
@@ -155,7 +162,7 @@ const Countries = () => {
               }
             />
           </CountriesListHeader>
-          <CountriesList>
+          <CountriesList ref={listRef}>
             {countriesOnThePage.map((country, index) => {
               return (
                 <AnimatedEntrance delay={index / 10} key={country.uuid}>

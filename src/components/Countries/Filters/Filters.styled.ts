@@ -23,18 +23,23 @@ export const FilterWrapper = styled.div`
     font-size: inherit;
   }
 
+  /* Order By and Region side by side, each label above its select */
   ${down('xl')} {
-    width: 100%;
-    margin-right: 0 !important;
-    margin-bottom: ${(props) => props.theme.spacings.small};
+    flex: 1;
+    min-width: 0;
+    flex-direction: column;
+    align-items: stretch;
 
     label {
+      margin-right: 0;
+      margin-bottom: ${(props) => props.theme.spacings.xxSmall};
       font-size: ${(props) => props.theme.fontSizes.xSmall};
-      min-width: 70px;
     }
 
     select {
       width: 100%;
+      /* 16px+ stops iOS Safari from zooming the page when a select gets focus */
+      font-size: 16px;
     }
   }
 `;
@@ -53,7 +58,12 @@ export const FiltersWrapper = styled.div`
   ${down('xl')} {
     width: 100%;
     height: auto;
-    margin-bottom: ${(props) => props.theme.spacings.small};
-    flex-direction: column;
+    margin-bottom: ${(props) => props.theme.spacings.large};
+    gap: ${(props) => props.theme.spacings.small};
+    align-items: flex-start;
+
+    ${FilterWrapper}:first-child {
+      margin-right: 0;
+    }
   }
 `;

@@ -13,7 +13,7 @@ const StyledSVGIcon = styled(ReactSVG)<{ animate: 'true' | 'false' }>`
   cursor: pointer;
   width: 18px;
   height: 18px;
-  margin-left: ${(props: any) => props.theme.spacings.medium};
+  margin-left: ${(props: any) => props.theme.spacings.xSmall};
 
   animation: ${(props) =>
     props.animate === 'true' &&

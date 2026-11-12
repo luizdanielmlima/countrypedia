@@ -2,10 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '../../store';
+import InfoDialog from '../InfoDialog';
 import ThemeSwitcher from '../ThemeSwitcher';
 import {
-  HeaderCredits,
-  HeaderDataFromWrapper,
   HeaderLogoStyled,
   HeaderRightSide,
   HeaderWrapper,
@@ -20,42 +19,7 @@ const Header = () => {
     <HeaderWrapper>
       <HeaderLogoStyled color={theme.colors.primary} />
       <HeaderRightSide>
-        <HeaderCredits>
-          <p>Developed by &nbsp; </p>
-          <a
-            href="http://luizdaniellima.com.br"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="my website"
-          >
-            Luiz Daniel Lima
-          </a>
-        </HeaderCredits>
-        <HeaderCredits>
-          <p>
-            &nbsp; <span>|&nbsp;</span>Data from &nbsp;{' '}
-          </p>
-          <HeaderDataFromWrapper>
-            <a
-              href="https://openweathermap.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="openweather"
-            >
-              Open Weather &nbsp;
-            </a>
-            <p>and &nbsp; </p>
-            <a
-              href="https://restcountries.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="restcountries"
-            >
-              Rest Countries
-            </a>
-          </HeaderDataFromWrapper>
-        </HeaderCredits>
-
+        <InfoDialog />
         <ThemeSwitcher />
       </HeaderRightSide>
     </HeaderWrapper>

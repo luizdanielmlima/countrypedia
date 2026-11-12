@@ -2,7 +2,14 @@ import styled from 'styled-components';
 import { down } from 'styled-breakpoints';
 
 export const AppWrapper = styled.div`
-  min-height: 100vh;
+  /* App shell: fills the viewport (dvh follows mobile browser toolbars) and the
+     list / country panel take whatever height is left. It only scrolls on tiny
+     viewports, e.g. a phone in landscape. */
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   background-color: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.primary};
   padding: ${(props) => props.theme.spacings.xxLarge};

@@ -10,8 +10,11 @@ export const CountryCardHeader = styled.div`
 
   ${down('xl')} {
     margin-left: ${(props) => props.theme.spacings.small};
+    margin-right: ${(props) => props.theme.spacings.xSmall};
     display: flex;
     align-items: center;
+    /* country name on the left, region on the right */
+    justify-content: space-between;
   }
 `;
 

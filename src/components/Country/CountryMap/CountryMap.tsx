@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect, useCallback } from 'react';
+import React, { FC, useLayoutEffect, useCallback, useRef } from 'react';
 
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4maps from '@amcharts/amcharts4/maps';
@@ -22,6 +22,8 @@ const CountryMap: FC<{ countryData: CountryType }> = ({ countryData }) => {
     (state: RootState) => state.countries.countries,
   );
   const dispatch = useDispatch();
+  // a ref instead of a fixed element id, so two maps could never collide
+  const chartRef = useRef<HTMLDivElement>(null);
 
   const handleSelectedCountry = useCallback(
     (countryCode: string) => {
@@ -41,7 +43,8 @@ const CountryMap: FC<{ countryData: CountryType }> = ({ countryData }) => {
   );
 
   useLayoutEffect(() => {
-    let map = am4core.create('chartdiv', am4maps.MapChart);
+    if (!chartRef.current) return;
+    let map = am4core.create(chartRef.current, am4maps.MapChart);
 
     // Set map definition
     map.geodata = am4geodata_worldLow;
@@ -115,7 +118,7 @@ const CountryMap: FC<{ countryData: CountryType }> = ({ countryData }) => {
 
   return (
     <>
-      <div id="chartdiv" style={{ width: '100%', height: '100%' }}></div>
+      <div ref={chartRef} style={{ width: '100%', height: '100%' }}></div>
     </>
   );
 };
